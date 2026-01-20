@@ -1,22 +1,34 @@
-[![View PDF](https://img.shields.io/badge/View-CV-blue)](Lluc_Santamaria_CV.pdf)
+# Professional Documents | Lluc Santamaria Riba
 
-# 📄 Curriculum Vitae (CV)
+This repository serves as a central archive for my professional documentation, authored and maintained in LaTeX. It currently houses the source code and compiled assets for my Curriculum Vitae and professional business card. These documents reflect my most current academic background, professional experience, and contact information.
 
-This repository contains the LaTeX source code and compiled PDF of my Curriculum Vitae. It is kept up to date with my most recent academic, professional, and research experience.
+## Repository Contents
 
-# 📂 Contents
+The project is organized into two primary directories. The `cv` directory contains the source code for my Curriculum Vitae (`Lluc_Santamaria_CV.tex`) and the resulting PDF. The `business_card` directory contains the design and logic for my contact cards, including the necessary QR code assets.
 
-- `Lluc_Santamaria_CV.tex`: LaTeX source code
-- `Lluc_Santamaria_CV.pdf`: compiled PDF version
+You can view the latest compiled versions directly here:
+- [View Curriculum Vitae (PDF)](cv/Lluc_Santamaria_CV.pdf)
+- [View Business Card (PDF)](business_card/Lluc_Santamaria_card.pdf)
 
-# 🛠️ Build Instructions
+## Build Instructions
 
-If you want to compile the CV from source:
+To compile these documents from source, a standard TeX distribution (such as TeX Live or MiKTeX) is required. Please note that the LaTeX source files require two consecutive compilation passes to correctly resolve page numbering and cross-references.
+
+**Compiling the CV:**
 
 ```bash
+cd cv
+pdflatex Lluc_Santamaria_CV.tex
 pdflatex Lluc_Santamaria_CV.tex
 ```
 
-# 📜 License
+**Compiling the Business Card:**
 
-This CV is shared for reference purposes only. Please do not redistribute, modify, or reuse without permission.
+```bash
+cd business_card
+pdflatex Lluc_Santamaria_card.tex
+```
+
+## Usage and License
+
+The contents of this repository are provided primarily for reference, verification, and recruitment purposes. While the LaTeX formatting and structure may be referenced for educational purposes, the personal data and specific content within these documents remain the intellectual property of the author. Please do not redistribute, modify, or reuse the personal details contained herein without explicit permission.

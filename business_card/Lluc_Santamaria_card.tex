@@ -1,0 +1,65 @@
+\documentclass[tikz,border=0mm]{standalone}
+\usepackage{graphicx}
+\usepackage{fontawesome5}
+\usepackage[sfdefault]{inter}
+\usepackage[T1]{fontenc}
+
+\definecolor{bluecard}{RGB}{30,144,255}
+
+\begin{document}
+
+\begin{tikzpicture}
+    \def\cardwidth{3.5in}
+    \def\cardheight{2in}
+
+    \fill[white] (0,0) rectangle (\cardwidth,\cardheight);
+
+    \fill[black] (2in,\cardheight) -- (\cardwidth,\cardheight) -- (\cardwidth,1.5) -- cycle;
+
+    \fill[black] (2in,0) -- (3in,\cardheight) -- (\cardwidth,0) -- cycle;
+
+    \fill[bluecard] (2.3in,0) -- (\cardwidth,0) -- (\cardwidth,\cardheight) -- cycle;
+
+    \node[anchor=north west, inner sep=0] at (0.2in,1.75in) {
+        \begin{minipage}{1.7in}
+            \fontsize{15}{13}\selectfont\bfseries Lluc Santamaria\\[0.03in]
+            \fontsize{9}{11}\selectfont\color{gray} Entrepeneur
+        \end{minipage}
+    };
+
+    \node[anchor=south west, inner sep=0] at (0.2in,0.2in) {
+        \begin{minipage}{1.7in}
+            \fontsize{7}{9}\selectfont
+            \color{bluecard}\faEnvelope\color{black}~ lluc.santa@gmail.com\\[0.05in]
+            \color{bluecard}\faGlobe\color{black}~ linktr.ee/lluc\_santamaria\\[0.05in]
+            \color{bluecard}\faHome\color{black}~ Irvine, CA 92697, USA
+        \end{minipage}
+    };
+
+    \node[anchor=center] at (2.85in,1in) {
+        \includegraphics[width=0.8in]{qr.png}
+    };
+\end{tikzpicture}
+
+\newpage
+
+\begin{tikzpicture}
+    \def\cardwidth{3.5in}
+    \def\cardheight{2in}
+
+    \fill[white] (0,0) rectangle (\cardwidth,\cardheight);
+
+    \fill[bluecard] (2.9in,0.4in) -- (\cardwidth,0) -- (\cardwidth,\cardheight) -- cycle;
+
+    \fill[bluecard] (0,0) -- (0.6in,0) -- (0,0.7in) -- cycle;
+
+    \node[anchor=center] at (1.75in,1.25in) {
+        \includegraphics[width=1in]{qr.png}
+    };
+
+    \node[anchor=center] at (1.75in,0.4in) {
+        \fontsize{18}{22}\selectfont\bfseries Stealth Startup
+    };
+\end{tikzpicture}
+
+\end{document}
