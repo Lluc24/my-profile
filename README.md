@@ -1,16 +1,16 @@
 # Professional Documents | Lluc Santamaria Riba
 
-This repository serves as a central archive for my professional documentation. It houses the complete record of my academic background, professional experience, and contact information in Markdown, alongside the LaTeX source code and compiled assets for my Curriculum Vitae and professional business card.
+This repository serves as a central archive for my professional documentation. It houses the complete record of my academic background, professional experience, and contact information in YAML, alongside the LaTeX source code and compiled assets for my Curriculum Vitae and professional business card.
 
 ## Source of Truth
 
-[`BACKGROUND.md`](BACKGROUND.md) is the canonical, human- and machine-readable record of my full professional profile — experience, education, projects, awards, and volunteering. The CV and business card are curated, derived views of this content. When information changes, `BACKGROUND.md` is updated first; the LaTeX documents are then regenerated to match.
+[`BACKGROUND.yaml`](BACKGROUND.yaml) is the canonical, machine-readable record of my full professional profile — experience, education, projects, awards, and volunteering. The CV and business card are curated, derived views of this content. When information changes, `BACKGROUND.yaml` is updated first; the LaTeX documents are then regenerated to match.
 
 ## Repository Contents
 
 | Path | Description |
 | --- | --- |
-| [`BACKGROUND.md`](BACKGROUND.md) | Full professional background (single source of truth). |
+| [`BACKGROUND.yaml`](BACKGROUND.yaml) | Full professional background (single source of truth). |
 | [`cv/`](cv) | Curriculum Vitae LaTeX source (`Lluc_Santamaria_CV.tex`) and compiled PDF. |
 | [`business_card/`](business_card) | Business card LaTeX source (`card.tex`), compiled PDF, and QR code asset. |
 
