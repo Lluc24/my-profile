@@ -27,13 +27,6 @@ experience:
       Vijay Vazirani. Throughout this six month residency, I am responsible for
       translating complex theoretical frameworks into practical experimental
       analyses that address real world challenges in resource allocation.
-    keywords:
-      - Software Development
-      - Test Engineering
-      - Python
-      - Game Theory
-      - Graph Algorithms
-      - Research
     key_points:
       - Conducting research in Game Theory supervised by Professor Vijay Vazirani
       - Implementing and benchmarking the leximin fair core imputation algorithm, optimizing payoff allocation for the worst-off agents in cooperative games
@@ -62,11 +55,6 @@ experience:
       stocks to the fund. I also represented the association at value investing
       workshops run by industry leaders like Pictet, Société Générale, and RH
       Asset Management.
-    keywords:
-      - Equity Analysis
-      - Financial Modeling
-      - Research
-      - Investment Thesis
     key_points:
       - Analyzed undervalued tech equities for a student-run 25k CHF portfolio
       - Pitched Melexis and Magyar Telekom (10%+ p.a., 5+ year hold) to 50+ members
@@ -90,15 +78,6 @@ experience:
       MareNostrum 5 supercomputer, which provided hands-on experience in
       high-performance computing (HPC), cluster execution, and managing
       challenges related to GPU memory and long-context training.
-    keywords:
-      - Test Engineering
-      - Pipelines
-      - Python
-      - HPC
-      - Data Analysis
-      - Parallel Programming
-      - PyTorch
-      - LLM
     key_points:
       - Fine-tuned and evaluated a 7B parameter CodeLlama-based model on the MareNostrum 5 supercomputer to generate PyCOMPSs-parallelized code
       - Expanded the PyCOMPSs repository by implementing and updating 30+ representative parallel programming problems
@@ -122,11 +101,6 @@ experience:
       creative projects like custom gamepads and Operation Game prototypes,
       adapting each session to their pace and encouraging collaboration,
       exploration, and creativity.
-    keywords:
-      - Education
-      - Curriculum Design
-      - Scratch
-      - Creative Technology
     key_points:
       - Solely led and graded 3 weekly sessions of up to 15 students aged 10–12
 
@@ -144,15 +118,6 @@ experience:
       custom software solutions to support the research community. My work
       spanned backend and frontend development using Django, AngularJS, and
       RESTful APIs, and I worked within a 12-person Scrum team.
-    keywords:
-      - JavaScript
-      - HTML
-      - CSS
-      - MySQL
-      - Databases
-      - Python
-      - Django
-      - Agile
     key_points:
       - Contributed to 3 internal web apps (HR contracting, beamline scheduling, project management) in a 12-person Scrum team using Django, AngularJS, and REST APIs
       - Shipped full-stack features for the research community while studying full-time
@@ -170,10 +135,6 @@ experience:
       serving food and drinks, taking and coordinating orders, and maintaining
       high service standards under pressure. Contributed to team efficiency by
       anticipating customer needs and keeping operations organized.
-    keywords:
-      - Customer Service
-      - Hospitality
-      - Teamwork
     key_points:
       - Managed service for up to 40 tables with a small team, maintaining high customer satisfaction
 
@@ -190,10 +151,6 @@ experience:
       Coordinated teaching strategy among lecturers to ensure course
       consistency and provided tailored guidance that improved student
       performance.
-    keywords:
-      - Teaching
-      - Discrete Mathematics
-      - Curriculum Coordination
     key_points:
       - Led 2 weekly discrete math sessions for up to 10 first-year students
       - Coordinated teaching strategy across multiple lecturers
@@ -210,10 +167,6 @@ experience:
       tailoring lessons to individual learning styles and academic needs.
       Helped students significantly improve their understanding and grades
       through personalized instruction.
-    keywords:
-      - Tutoring
-      - STEM Education
-      - Mentorship
     key_points:
       - Tutored and mentored five students, producing measurable grade improvements
 
@@ -228,10 +181,6 @@ experience:
       Worked in a fast-paced, team-oriented environment handling customer
       service, food preparation, and maintaining productivity during peak
       hours. Developed strong collaboration and adaptability skills.
-    keywords:
-      - Food Service
-      - Teamwork
-      - Operations
     key_points:
       - Maintained high productivity and service quality during peak periods
 
@@ -300,11 +249,6 @@ projects:
       fair payoff allocation in cooperative games. Implemented and benchmarked
       the leximin fair core imputation algorithm, optimizing outcomes for the
       worst-off agents under resource allocation constraints.
-    keywords:
-      - Game Theory
-      - Graph Algorithms
-      - Python
-      - Research
     key_points:
       - Implemented and benchmarked the leximin fair core imputation algorithm for cooperative games
       - Optimized payoff allocation for the worst-off agents, supervised by Professor Vijay Vazirani
@@ -316,12 +260,6 @@ projects:
       Research and implementation of a static divergence checker for Scala 3
       match types, replacing unsafe runtime StackOverflowError handling with
       compile-time termination guarantees.
-    keywords:
-      - Scala 3
-      - Compilers
-      - Type Systems
-      - Formal Verification
-      - Algorithms
     key_points:
       - Designed and documented a divergence-checking algorithm for recursive match types, implemented in Scala 3 compiler PR #24661
       - Built a termination argument based on complexity vectors and covering sets to detect cycles and strict growth
@@ -333,12 +271,6 @@ projects:
     description: >
       EPFL CS-433 machine learning project focused on predicting coronary heart
       disease risk from large-scale CDC health data.
-    keywords:
-      - Machine Learning
-      - Logistic Regression
-      - Data Preprocessing
-      - Model Evaluation
-      - Python
     key_points:
       - Trained and evaluated models on 328k+ samples and 321 raw features with heavy missing data and class imbalance
       - Implemented robust preprocessing and leakage-safe cross-validation workflow, including threshold optimization
@@ -351,12 +283,6 @@ projects:
       Course project on multi-agent reinforcement learning in partially
       observable environments, combining joint-action learning with
       game-theoretic solution concepts.
-    keywords:
-      - Reinforcement Learning
-      - Multi-Agent Systems
-      - Game Theory
-      - Experimentation
-      - Python
     key_points:
       - Implemented and analyzed coordination strategies based on Pareto, Nash, Welfare, and Minimax solution concepts
       - Integrated experiment tracking and sweeps to compare convergence, reward trade-offs, and generalization behavior
@@ -368,12 +294,6 @@ projects:
     description: >
       Interpreter for a simplified J/APL-like language, implemented in Python
       with ANTLR and NumPy as part of a programming languages course.
-    keywords:
-      - Interpreters
-      - ANTLR
-      - Language Design
-      - Parsing
-      - Python
     key_points:
       - Built a full interpreter pipeline covering lexical, syntactic, and semantic processing for language G
       - Structured the runtime with separate visitor and execution engine components for maintainability and scalability
@@ -385,12 +305,6 @@ projects:
     description: >
       Extensible Django starter project with base pages, contact workflows,
       and an AI advisor chatbot powered by Google Gemini.
-    keywords:
-      - Django
-      - Full-Stack Web
-      - REST/Web Apps
-      - Generative AI
-      - Python
     key_points:
       - Developed a modular Django foundation with reusable app structure for rapid project bootstrapping
       - Added Gemini-based chat functionality with session-backed conversation flow
@@ -402,12 +316,6 @@ projects:
     description: >
       Browser-based social deduction game for 3 to 10 players where users
       distinguish true facts from improvised misinformation.
-    keywords:
-      - JavaScript
-      - Frontend Development
-      - Game Logic
-      - UX Design
-      - Offline-First
     key_points:
       - Built a no-dependency single-device game with private role reveals, round flow, and voting mechanics
       - Designed the gameplay/state model for repeated rounds and pass-and-play interaction
