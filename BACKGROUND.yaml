@@ -11,25 +11,45 @@ contact:
 
 experience:
   - title: Balsells Research Fellow
-    organization: UC Irvine
+    organization: University of California, Irvine
     employment_type: Full-time
     start_date: 2026-02
     end_date: 2026-07
     location: Irvine, California, United States
     location_type: On-site
     description: >
-      I am serving as a Balsells Research Fellow at the University of California,
-      Irvine, where I am dedicated to advanced research in the field of Game
-      Theory. My work focuses on the intersection of algorithmic design and
-      computational fairness, specifically exploring how to implement systems
-      that ensure equitable and stable outcomes for all participants. This
-      research is conducted under the distinguished supervision of Professor
-      Vijay Vazirani. Throughout this six month residency, I am responsible for
-      translating complex theoretical frameworks into practical experimental
-      analyses that address real world challenges in resource allocation.
+      I completed a six-month research stay as a Balsells Research Fellow at
+      the Donald Bren School of Information and Computer Sciences, University
+      of California, Irvine, supervised by Professor Vijay Vazirani, one of
+      the leading figures in algorithmic game theory. The fellowship, funded
+      by the Balsells Foundation and awarded each semester to up to three
+      engineering students from Catalonia, also served as my Bachelor's
+      Senior Project at the Universitat Politècnica de Catalunya (UPC),
+      co-advised by Professor Maria José Serna Iglesias. My core deliverable
+      was the first public implementation of a novel combinatorial algorithm
+      that Professor Vazirani had recently
+      designed and published (arXiv:2402.11437) for computing the leximin
+      core imputation of the assignment game: the unique profit allocation
+      that lexicographically maximizes the outcome of the worst-off agent
+      first, then the next worst-off, and so on, while remaining stable
+      within the cooperative game's core. I built the solver in Python with
+      exact rational arithmetic, using NetworkX for maximum-weight matching,
+      and open-sourced it under the MIT license at github.com/Lluc24/leximin.
+      Around it I built an independent LP-based reference solver (PuLP) to
+      cross-check correctness, a seeded random graph generator for degenerate
+      and non-degenerate benchmark families, and a reproducible experimental
+      pipeline that validated the algorithm's output on 1,320 generated
+      instances and showed runtime and memory scaling consistent with the
+      theoretical bounds (O(n^5) and O(n^2) on dense graphs). The broader
+      research context spanned matching theory, graph theory and cooperative
+      game theory. I presented and defended the resulting thesis at the
+      Facultat d'Informàtica de Barcelona (FIB), UPC, on July 1, 2026, before
+      a three-member tribunal, receiving a final grade of 9.6/10.
     key_points:
-      - Conducting research in Game Theory supervised by Professor Vijay Vazirani
-      - Implementing and benchmarking the leximin fair core imputation algorithm, optimizing payoff allocation for the worst-off agents in cooperative games
+      - Built the first public implementation of Vazirani's leximin core algorithm
+      - Validated 1,320 game instances against an independent LP solver within 1e-6
+      - Matched O(n^5) time and O(n^2) memory bounds via OLS fits with R^2 >= 0.90
+      - Earned a 9.6/10 defending the thesis at FIB, UPC as my Senior Project
 
   - title: Equity Analyst
     organization: Investment Society Lausanne
@@ -204,7 +224,7 @@ education:
       - Top 1 student of my cohort with a GPA 9.25/10
       - Honors in 16 courses out of 27
       - Elected as delegate for three courses, representing 400+ students
-      - Senior Project fulfilled as an external research internship at UC Irvine under the Balsells Fellowship, supervised by Professor Vijay Vazirani
+      - Senior Project fulfilled as an external research internship at University of California, Irvine under the Balsells Fellowship, supervised by Professor Vijay Vazirani
 
   - institution: EPFL
     program: Exchange Program - Master's degree, Computer Science
@@ -244,14 +264,40 @@ education:
 
 projects:
   - name: Leximin Fair Core Imputation for Cooperative Games
+    repo: leximin
+    github: github.com/Lluc24/leximin
     description: >
-      Research project at UC Irvine, supervised by Professor Vijay Vazirani, on
-      fair payoff allocation in cooperative games. Implemented and benchmarked
-      the leximin fair core imputation algorithm, optimizing outcomes for the
-      worst-off agents under resource allocation constraints.
+      First public Python implementation of Vijay Vazirani's combinatorial
+      algorithm for computing the leximin core imputation of the assignment
+      game (arXiv:2402.11437), open-sourced under the MIT license. The
+      algorithm classifies every vertex and edge as essential, viable or
+      subpar, then runs a clock-based primal-dual event loop over fundamental
+      components to converge on the unique leximin-optimal imputation, in
+      O(mn^3) time and O(n^2) space. The implementation uses exact rational
+      arithmetic (fractions.Fraction) throughout instead of floats, since an
+      earlier float-based prototype produced incorrect tightness decisions on
+      near-degenerate instances; it uses NetworkX for the underlying
+      maximum-weight matching calls. I built two supporting components to
+      make the result trustworthy on its own: an independent LP-based
+      reference solver (PuLP with the CBC backend) for cross-validation, and
+      a random bipartite graph generator producing both degenerate and
+      non-degenerate families across a range of sizes and densities with
+      fixed seeds for full reproducibility. Using that generator, I built a
+      benchmark suite of 1,320 graph instances (n from 4 to 67, three edge
+      densities, ten seeds per configuration) to cross-validate every
+      instance against the LP solver within a 1e-6 tolerance, and profiled
+      runtime (cProfile) and peak memory (tracemalloc) across the same
+      instances. Fitting ordinary least squares regressions to the log-log
+      transformed data showed runtime scaling consistent with O(n^5) and
+      memory scaling consistent with O(n^2) on dense graphs, in line with the
+      theoretical bounds. The project includes a full pytest suite,
+      structured logging and a CLI entry point; the accompanying thesis and
+      all supporting documentation are at github.com/Lluc24/leximin-docs.
     key_points:
-      - Implemented and benchmarked the leximin fair core imputation algorithm for cooperative games
-      - Optimized payoff allocation for the worst-off agents, supervised by Professor Vijay Vazirani
+      - Implemented the O(mn^3) clock-based primal-dual solver in pure Python
+      - Chose exact rational arithmetic after floats broke on near-degenerate graphs
+      - Generated seeded benchmarks across 3 densities, 2 families, and n up to 67
+      - Reproduced every worked example from the paper in a 9-module pytest suite
 
   - name: Static Divergence Checking for Scala 3 Match Types
     repo: divergence
@@ -321,18 +367,19 @@ projects:
       - Designed the gameplay/state model for repeated rounds and pass-and-play interaction
       - Curated and integrated a 160+ fact dataset for replayability and low setup friction
 
-awards_and_scholarships:
+fellowships_and_scholarships:
   - name: Balsells Fellowship, Research Scholarship
-    description: Awarded to up to 3 Catalan engineering students per semester for thesis research at UC Irvine
+    description: >
+      Fellowship selecting 3 Catalan engineering students per semester for
+      funded thesis research at the University of California, Irvine (UCI),
+      working directly with UCI faculty advisors. Endowed since 1995 by Pete
+      Balsells and his family at the Samueli School of Engineering, it
+      targets the most talented young engineers and scientists from
+      Catalonia, building on the California-Catalonia Sister State Agreement.
 
+honors_and_recognition:
   - name: Universitat Politècnica de Catalunya (UPC), Highest GPA Award
-    description: Ranked \#1 of nearly 400 students in the first two years of the degree program
-
-  - name: Heyning-Roelli Foundation, Exchange Scholarship
-    description: Competitive merit-based scholarship supporting exchange studies at EPFL
-
-  - name: Fundación Banco Santander, Exchange Scholarship
-    description: Merit-based scholarship awarded to top Spanish university students for international exchange at EPFL
+    description: Ranked #1 of nearly 400 students in the first two years of the degree program
 
   - name: SUI Hackathon, Winner
     description: Winner at the SUI Foundation Hackathon 2025 (Lausanne) for the Healix blockchain project
