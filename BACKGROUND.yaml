@@ -173,23 +173,33 @@ experience:
 
   - title: Technology Instructor
     organization: Eixos Creativa
-    employment_type: Part-time
+    employment_type: Extracurricular
     start_date: 2025-04
     end_date: 2025-06
     location: Barcelona, Catalonia, Spain
     location_type: On-site
     description: >
-      I led an extracurricular program teaching creative technology to children
-      aged 10 to 12 across three locations: Xirinacs School, Llacuna del
-      Poblenou School, and Eixos Creativa Academy. I designed and delivered
-      hands-on sessions that combined Scratch programming with Makey Makey
-      kits, introducing kids to concepts such as basic electronics,
-      conductivity, and interactive design. I guided students in building
-      creative projects like custom gamepads and Operation Game prototypes,
-      adapting each session to their pace and encouraging collaboration,
-      exploration, and creativity.
+      As a Technology Instructor at Eixos Creativa, a Barcelona company
+      running creative technology programs for kids, I taught an
+      extracurricular program to children aged 10 to 12 at three locations,
+      with a weekly one-hour session at each: two public schools in Barcelona
+      (Xirinacs School and Llacuna del Poblenou School) and the Eixos
+      Creativa Academy. I led every class on my own, typically 10 to 12
+      students and up to 15, and was also responsible for grading them. The
+      sessions were hands-on projects mixing programming, robotics and arts
+      with Scratch and Makey Makey kits: the students built playful devices
+      such as custom gamepads, an Operation Game and DJ tables, picking up
+      concepts like basic electronics, conductivity and interactive design
+      along the way. My approach gave them freedom to build autonomously
+      while I moved between groups supporting whoever was stuck, adapting
+      explanations of the harder concepts to each group's pace. I fostered a
+      collaborative learning environment by having them work in pairs and
+      groups, letting them divide the work and split tasks among themselves
+      to reach the project goal. It was a pleasure to help young minds
+      connect creativity and technology.
     key_points:
-      - Solely led and graded 3 weekly sessions of up to 15 students aged 10–12
+      - Solely led and graded 3 weekly classes of up to 15 kids aged 10-12
+      - Guided builds of gamepads and DJ tables with Scratch and Makey Makey
 
   - title: Software Engineer Intern
     organization: ALBA Synchrotron
