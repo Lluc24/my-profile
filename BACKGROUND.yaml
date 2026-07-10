@@ -48,16 +48,18 @@ experience:
       I completed a six-month research stay as a Balsells Research Fellow at
       the Donald Bren School of Information and Computer Sciences, University
       of California, Irvine, supervised by Professor Vijay Vazirani, one of
-      the leading figures in algorithmic game theory. The fellowship, funded
+      the leading figures in algorithmic game theory, recipient of the 2022
+      John von Neumann Theory Prize and an ACM Fellow. The fellowship, funded
       by the Balsells Foundation and awarded each semester to up to three
       engineering students from Catalonia, also served as my Bachelor's
       Senior Project at the Universitat Politècnica de Catalunya (UPC),
       co-advised by Professor Maria José Serna Iglesias. My core deliverable
       was the first public implementation of a novel combinatorial algorithm
       that Professor Vazirani had recently designed and published
-      (arXiv:2402.11437) for computing the leximin
-      core imputation of the assignment game: the unique profit allocation
-      that lexicographically maximizes the outcome of the worst-off agent
+      (arXiv:2402.11437, accepted at ACM EC, the premier conference on
+      economics and computation) for computing the leximin core imputation
+      of the assignment game: the unique profit allocation that
+      lexicographically maximizes the outcome of the worst-off agent
       first, then the next worst-off, and so on, while remaining stable
       within the cooperative game's core. I built the solver in Python with
       exact rational arithmetic, using NetworkX for maximum-weight matching,
@@ -73,10 +75,10 @@ experience:
       Facultat d'Informàtica de Barcelona (FIB), UPC, on July 1, 2026, before
       a three-member tribunal, receiving a final grade of 9.6/10.
     key_points:
-      - Built the first public implementation of Vazirani's leximin core algorithm
-      - Validated 1,320 game instances against an independent LP solver within 1e-6
-      - Matched O(n^5) time and O(n^2) memory bounds via OLS fits with R^2 >= 0.90
-      - Earned a 9.6/10 defending the thesis at FIB, UPC as my Senior Project
+      - Built the first public implementation of Vazirani's leximin algorithm
+      - Turned a paper accepted at ACM EC into a working open-source solver
+      - Awarded the Balsells Fellowship, at most 3 granted per semester
+      - Earned a 9.6/10 defending the thesis at UPC as my Senior Project
 
   - title: Equity Analyst
     organization: Investment Society Lausanne
@@ -477,13 +479,16 @@ projects:
     description: >
       First public Python implementation of Vijay Vazirani's combinatorial
       algorithm for computing the leximin core imputation of the assignment
-      game (arXiv:2402.11437), open-sourced under the MIT license. The
-      algorithm classifies every vertex and edge as essential, viable or
-      subpar, then runs a clock-based primal-dual event loop over fundamental
-      components to converge on the unique leximin-optimal imputation, in
-      O(mn^3) time and O(n^2) space. The implementation uses exact rational
-      arithmetic (fractions.Fraction) throughout instead of floats, since an
-      earlier float-based prototype produced incorrect tightness decisions on
+      game (arXiv:2402.11437), a paper accepted at ACM EC, the premier
+      conference on economics and computation, that existed only as
+      abstract theory until this implementation; open-sourced under the
+      MIT license. The algorithm classifies every vertex and edge as
+      essential, viable or subpar, then runs a clock-based primal-dual
+      event loop over fundamental components to converge on the unique
+      leximin-optimal imputation, in O(mn^3) time and O(n^2) space.
+      The implementation uses exact rational arithmetic
+      (fractions.Fraction) throughout instead of floats, since an earlier
+      float-based prototype produced incorrect tightness decisions on
       near-degenerate instances; it uses NetworkX for the underlying
       maximum-weight matching calls. I built two supporting components to
       make the result trustworthy on its own: an independent LP-based
@@ -503,21 +508,55 @@ projects:
       all supporting documentation are at github.com/Lluc24/leximin-docs.
     key_points:
       - Implemented the O(mn^3) clock-based primal-dual solver in pure Python
-      - Chose exact rational arithmetic after floats broke on near-degenerate graphs
-      - Generated seeded benchmarks across 3 densities, 2 families, and n up to 67
-      - Reproduced every worked example from the paper in a 9-module pytest suite
+      - Chose exact rational arithmetic after floats broke edge cases
+      - Cross-checked 1,320 seeded instances against an independent LP solver
+      - Benchmarks matched theoretical O(n^5) time and O(n^2) memory bounds
 
   - name: Static Divergence Checking for Scala 3 Match Types
-    repo: divergence
-    github: github.com/Lluc24/divergence
+    repo: match_types_divergence_check
+    github: github.com/Lluc24/match_types_divergence_check
     description: >
-      Research and implementation of a static divergence checker for Scala 3
-      match types, replacing unsafe runtime StackOverflowError handling with
-      compile-time termination guarantees.
+      Research project turned language proposal for Scala 3, born at
+      the Programming Methods Laboratory (LAMP) of the École
+      Polytechnique Fédérale de Lausanne (EPFL) under the supervision
+      of Martin Odersky, the creator of Scala and author of javac,
+      and Matthieu Bovel. Match types, a core feature of type-level
+      programming in Scala 3, can diverge during reduction; the
+      compiler detected this by catching StackOverflowError at
+      runtime, an unsafe practice since the JVM does not guarantee
+      cleanup after a stack overflow (documented JDK issues include
+      bypassed finally blocks and locks left held) and the behavior
+      varies with platform and stack size. I designed a static check
+      that rejects potentially infinite reductions at compile time:
+      it extends the domination criterion of SIP-31 (byname
+      implicits) to match type argument lists, detecting both cycles
+      and strict structural growth over stable covering sets, with an
+      exemption for value-level iteration through compiletime.ops and
+      a grace threshold that keeps the full Scala 3 test suite and
+      known ecosystem patterns compiling unchanged. Through three
+      lemmas building on a generalized Dickson's Lemma, I proved by
+      contradiction that no reduction can run forever under the
+      check. I converged on the final pointwise-dominance algorithm
+      after three iterations and implemented it in the Scala 3
+      compiler (scala/scala3 PR #24661): every infinite reduction,
+      without exception, is now caught at compile time and reported
+      through dedicated error messages carrying the full reduction
+      trace. After an in-person presentation, Martin Odersky and the
+      LAMP team endorsed the work for the Scala Improvement Process:
+      the pre-SIP passed community discussion with the SIP committee
+      chair calling it excellent work that should be enshrined as a
+      SIP, and it now stands as a formal proposal (PR #136 in
+      scala/improvement-proposals) that will set, for future versions
+      of the language, both the rules a match type must satisfy to
+      compile and the guards by which the compiler detects and
+      rejects infinite reductions.
     key_points:
-      - Designed and documented a divergence-checking algorithm for recursive match types, implemented in Scala 3 compiler PR #24661
-      - Built a termination argument based on complexity vectors and covering sets to detect cycles and strict growth
-      - Helped resolve related compiler issues during development (#24120, #24730) while preserving existing compiler test behavior
+      - Designed a check catching 100% of infinite reductions (PR #24661)
+      - Supervised by Martin Odersky, creator of Scala and author of javac
+      - Backed by a three-lemma termination proof generalizing Dickson's Lemma
+      - Extended SIP-31's criterion with covering sets and complexity vectors
+      - Kept the full Scala 3 test suite and ecosystem compiling unchanged
+      - Scala Improvement Process (PR #136) to define Match Types behavior
 
   - name: Coronary Heart Disease Risk Prediction
     repo: ML_Project1
