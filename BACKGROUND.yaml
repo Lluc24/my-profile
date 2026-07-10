@@ -80,33 +80,45 @@ experience:
 
   - title: Equity Analyst
     organization: Investment Society Lausanne
-    employment_type: Part-time
+    employment_type: Extracurricular
     start_date: 2025-09
     end_date: 2026-01
     location: Lausanne, Vaud, Switzerland
     location_type: On-site
     description: >
-      As an Equity Analyst collaborating within a five-person team dedicated to
-      the Technology and Semiconductors sector, I helped manage capital for the
-      Investment Society Lausanne's 25k CHF real-money fund. Our mandate was
-      strictly defined by the value investing philosophies of Warren Buffett and
-      Benjamin Graham, prioritizing undervalued companies with strong dividends
-      over hype-driven growth stocks.
+      As an Equity Analyst at the Investment Society Lausanne, a student
+      association at HEC Lausanne (the business faculty of the University of
+      Lausanne) and one of the few student societies managing a real-money
+      fund, I helped run a 25k CHF portfolio under a strict value investing
+      mandate in the tradition of Warren Buffett and Benjamin Graham:
+      undervalued companies with a durable moat and growing dividends, held
+      for five years or more. Analysts work in sector teams of five (one
+      portfolio manager and four equity analysts) that each pitch two stocks
+      per semester to the general assembly; my team covered the Technology
+      and Semiconductors sector.
 
-      Working jointly to analyze the market, my team developed high-conviction
-      investment theses for Melexis NV and Magyar. For Melexis, we built a case
-      based on its economic moat and critical role in the EV transition, while
-      for Magyar, we highlighted its robust financials and undervalued brand
-      power. Defending these proposals required persuading a general assembly of
-      over 50 members; we successfully secured the 75% majority vote to add both
-      stocks to the fund. I also represented the association at value investing
-      workshops run by industry leaders like Pictet, Société Générale, and RH
-      Asset Management.
+      I sourced our first pick, Melexis NV, a Belgian fabless designer of
+      automotive sensor chips, and owned the financial analysis (income
+      statement, cash flow, balance sheet and dividend ratios spanning 2013
+      to 2024) together with the moat thesis inside the electric vehicle
+      supply chain: proprietary sensing technology, prohibitive
+      requalification switching costs for car makers, and gross margins held
+      above 40% for a decade. For our second pick, Magyar Telekom, Hungary's
+      leading telecom operator and a Deutsche Telekom subsidiary, I delivered
+      the industry overview and the moat analysis of its position in a
+      consolidated three-player oligopoly with prohibitive entry barriers.
+      Both pitches won over 75% of the votes in a general assembly of more
+      than 50 members: the fund bought Melexis on November 10, 2025 at 57.7
+      EUR and Magyar Telekom on December 8, 2025 at 1,774 HUF, and by July
+      2026 they traded at 74 EUR (up 28%) and 2,670 HUF (up 51%). I also
+      represented the association at value investing workshops run by Pictet,
+      Société Générale and RH Asset Management.
     key_points:
-      - Analyzed undervalued tech equities for a student-run 25k CHF portfolio
-      - Pitched Melexis and Magyar Telekom (10%+ p.a., 5+ year hold) to 50+ members
+      - Pitched Melexis and Magyar Telekom into a 25k CHF fund with 75%+ votes
+      - Modeled 12 years of Melexis three-statement financials and its EV moat
+      - Both picks gained 28% and 51% within 8 months of entering the fund
 
-  - title: ML Engineer Intern
+  - title: Machine Learning Research Intern
     organization: Barcelona Supercomputing Center
     employment_type: Internship
     start_date: 2025-07
@@ -114,22 +126,50 @@ experience:
     location: Barcelona, Catalonia, Spain
     location_type: On-site
     description: >
-      During my two-month summer internship at the Barcelona Supercomputing
-      Center (BSC) in the Workflows and Distributed Computing group, I worked on
-      fine-tuning a large language model (LLM) to generate PyCOMPSs-parallelized
-      Python code from either sequential programs or textual descriptions. I
-      developed an automated dataset generation and reconstruction pipeline,
-      updated and expanded the PyCOMPSs examples repository, and ensured its
-      usability for large-scale dataset creation. A central part of the work
-      involved training and evaluating a CodeLlama-based model on the
-      MareNostrum 5 supercomputer, which provided hands-on experience in
-      high-performance computing (HPC), cluster execution, and managing
-      challenges related to GPU memory and long-context training.
+      During my summer internship at the Barcelona Supercomputing Center (BSC)
+      in the Workflows and Distributed Computing group, directed by Rosa M.
+      Badia and mentored by researcher Eduardo Iraola, I built and trained the
+      first large language model (LLM) specialized in PyCOMPSs, the group's
+      Python framework for task-based parallelism on clusters. General LLMs
+      have barely seen PyCOMPSs during pre-training and hallucinate when asked
+      for it, yet many teams using BSC's supercomputers need it to run their
+      code in parallel without being parallel programming experts. The goal
+      was a model that generates PyCOMPSs-parallelized Python code from
+      either a sequential program or a plain-text description.
+
+      I owned the project end to end. I first learned PyCOMPSs by writing my
+      own parallel applications, including a distributed Q-learning agent,
+      then implemented and updated more than 30 parallel applications in the
+      PyCOMPSs examples repository (linear algebra, sorting, a convolutional
+      neural network, Mandelbrot and others), representative of the workloads
+      typically run with the framework, so they were runnable, consistent and
+      reliable enough to become training data. On top of that corpus I
+      implemented a CLI pipeline, covered by unit and black-box tests, that
+      scrapes each application, automatically derives a sequential version of
+      the parallel code and validates it by execution, and assembles two
+      instruction datasets: sequential code to parallel code, and description
+      to parallel code. The pipeline can also reconstruct runnable source
+      files back from any dataset for inspection and debugging.
+
+      Finally I fine-tuned CodeLlama 7B with LoRA adapters on multi-GPU nodes
+      of MareNostrum 5. Real applications tokenize far beyond common defaults
+      (up to 7,469 tokens against a 700-token default), which first caused
+      silent truncation and then CUDA out-of-memory crashes. I wrote a
+      lightweight training script from scratch to isolate the memory
+      behaviour, found a stable configuration (per-device batch size 2 with
+      16 gradient accumulation steps and fp16), diagnosed a silent hang
+      caused by mismatched Python modules between the cluster's
+      general-purpose and accelerated partitions, and ported the working
+      settings back into the pipeline for reproducible, checkpointed
+      training. The result was the first fine-tuned models for PyCOMPSs code
+      generation, verified against training prompts and by manual inspection
+      and documented in an internship report. Both my director and my mentor
+      published LinkedIn recommendations describing this work.
     key_points:
-      - Fine-tuned and evaluated a 7B parameter CodeLlama-based model on the MareNostrum 5 supercomputer to generate PyCOMPSs-parallelized code
-      - Expanded the PyCOMPSs repository by implementing and updating 30+ representative parallel programming problems
-      - Engineered an automated pipeline for reproducible training data generation
-      - Optimized model performance for cluster execution using HPC resources
+      - Fine-tuned CodeLlama 7B into the first LLM able to write PyCOMPSs code
+      - Implemented and updated 30+ parallel apps mirroring real HPC workloads
+      - Built a unit-tested pipeline turning the apps into 2 LLM datasets
+      - Tamed CUDA OOM on MareNostrum 5 to train with 7,500-token prompts
 
   - title: Technology Instructor
     organization: Eixos Creativa
