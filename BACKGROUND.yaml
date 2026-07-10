@@ -54,8 +54,8 @@ experience:
       Senior Project at the Universitat Politècnica de Catalunya (UPC),
       co-advised by Professor Maria José Serna Iglesias. My core deliverable
       was the first public implementation of a novel combinatorial algorithm
-      that Professor Vazirani had recently
-      designed and published (arXiv:2402.11437) for computing the leximin
+      that Professor Vazirani had recently designed and published
+      (arXiv:2402.11437) for computing the leximin
       core imputation of the assignment game: the unique profit allocation
       that lexicographically maximizes the outcome of the worst-off agent
       first, then the next worst-off, and so on, while remaining stable
@@ -173,7 +173,7 @@ experience:
 
   - title: Technology Instructor
     organization: Eixos Creativa
-    employment_type: Extracurricular
+    employment_type: pa
     start_date: 2025-04
     end_date: 2025-06
     location: Barcelona, Catalonia, Spain
@@ -195,8 +195,7 @@ experience:
       explanations of the harder concepts to each group's pace. I fostered a
       collaborative learning environment by having them work in pairs and
       groups, letting them divide the work and split tasks among themselves
-      to reach the project goal. It was a pleasure to help young minds
-      connect creativity and technology.
+      to reach the project goal.
     key_points:
       - Solely led and graded 3 weekly classes of up to 15 kids aged 10-12
       - Guided builds of gamepads and DJ tables with Scratch and Makey Makey
@@ -209,15 +208,47 @@ experience:
     location: Cerdanyola del Vallès, Catalonia, Spain
     location_type: On-site
     description: >
-      I completed a six-month internship as a Software Engineering Intern at
-      ALBA Synchrotron within the Computing Division. I contributed to internal
-      systems that streamline operations, automate processes, and deliver
-      custom software solutions to support the research community. My work
-      spanned backend and frontend development using Django, AngularJS, and
-      RESTful APIs, and I worked within a 12-person Scrum team.
+      I completed a six-month internship as a Software Engineer Intern at
+      ALBA Synchrotron, the leading synchrotron light source in the
+      Mediterranean region, in the Management Information Systems (MIS)
+      section of the Computing Division, the team building the internal
+      systems that streamline operations, automate processes and deliver
+      custom software for the center. Managed by Toni Fernández, head of the
+      Software Development and QA group, I worked across backend and
+      frontend in a 12-person Scrum team (daily stand-ups, sprint planning
+      and reviews) with two stacks: Django rendering its own HTML templates
+      with JavaScript behind them, or Django with Django REST Framework
+      exposing RESTful APIs to an AngularJS frontend, on MySQL and
+      PostgreSQL databases.
+
+      I contributed to three internal products. For the hiring application
+      that digitalizes ALBA's recruitment workflow (as a public and highly
+      specialized scientific facility it follows particular procedures that
+      previously circulated on paper), I contributed to implementing the
+      state machine driving each application through the phases of the
+      process. On the main beamline management system, where scientists
+      propose projects, vote on proposals and get assigned beamline hours
+      and turns, I improved the responsiveness and usability of the web
+      interface, making its tables adapt through Bootstrap's responsive
+      grid to three breakpoints (4 columns on mobile devices, 6 on medium
+      and 8 on large screens), directly impacting accessibility and user
+      experience. For the Project Management web app, I helped model the
+      lifecycle of scientific projects into web abstractions and integrated
+      it with ALBA's central user database to create teams, select leaders
+      and assign roles.
+
+      I did this internship concurrently with my full-time Computer
+      Engineering studies, keeping my academic excellence as the top-ranked
+      student of my class at the Universitat Politècnica de Catalunya (UPC),
+      while growing in teamwork, technical communication and adaptability in
+      a multicultural, multidisciplinary environment. My manager published a
+      LinkedIn recommendation of my work, highlighting my autonomy,
+      proactivity and speed of learning.
     key_points:
-      - Contributed to 3 internal web apps (HR contracting, beamline scheduling, project management) in a 12-person Scrum team using Django, AngularJS, and REST APIs
-      - Shipped full-stack features for the research community while studying full-time
+      - Shipped features for 3 internal Django apps in a 12-person Scrum team
+      - Co-built the state machine digitalizing ALBA's paper hiring process
+      - Revamped UX of the app scheduling beamline hours, votes and turns
+      - Kept the #1 rank of my UPC class while interning alongside studies
 
   - title: Waiter — Ibericus, Baricentro
     organization: FIC5 SHOP SL
