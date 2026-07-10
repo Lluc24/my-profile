@@ -364,61 +364,111 @@ experience:
 
 education:
   - institution: Universitat Politècnica de Catalunya
-    program: Bachelor of Engineering - BE, Computer Engineering, Computer Science
+    program: Bachelor's Degree in Informatics Engineering, major in Computer Science
     start_date: 2022-09
     end_date: 2026-06
-    grade: 9.25 / 10
-    activities_and_societies: >
-      Participated in a scholarship program supporting first-year students in
-      Discrete Mathematics by delivering lectures and exercise sessions.
-      Elected as student delegate for three university courses. Engaged in
-      sports and fitness activities at Diagonal Sports Club.
+    grade: 9.27 / 10
     description: >
-      Pursuing a Bachelor's degree in Computer Engineering, majoring in
-      Computer Science, at the Universitat Politècnica de Catalunya (UPC).
-      Ranked top 1 in a cohort of nearly 400 students with a 9.25/10 GPA and 16
-      honors across coursework.
+      Bachelor's degree in Informatics Engineering with a major in
+      Computer Science at the Facultat d'Informàtica de Barcelona
+      (FIB), Universitat Politècnica de Catalunya (UPC). I graduated
+      ranked #1 of a cohort of nearly 400 students, with a 9.27/10
+      GPA and honors in 16 of the 27 courses I took at UPC. Alongside
+      coursework, I was elected student delegate for three courses,
+      representing the cohort before the faculty, and taught Discrete
+      Mathematics to first-year students under a UPC teaching
+      scholarship. In my final year, I completed an academic exchange
+      at the École Polytechnique Fédérale de Lausanne (EPFL), taking
+      Master-level Computer Science courses, and my Senior Project
+      abroad at the University of California, Irvine, as a Balsells
+      Research Fellow supervised by Professor Vijay Vazirani,
+      defending it with a 9.6/10.
+    coursework:
+      - Programming I (8.6/10)
+      - Fundamentals of Mathematics (9.3/10, Honors)
+      - Introduction to Computers (8.0/10)
+      - Physics (8.2/10)
+      - Programming II (10.0/10, Honors)
+      - Computer Organization (9.3/10)
+      - Discrete Mathematics and Linear Algebra (9.3/10, Honors)
+      - Calculus (9.0/10, Honors)
+      - Probability and Statistics (10.0/10, Honors)
+      - Data Structures and Algorithms (10.0/10, Honors)
+      - Databases (9.0/10, Honors)
+      - Operating Systems (8.7/10)
+      - Embedded Systems and Interfacing (10.0/10, Honors)
+      - Introduction to Software Engineering (10.0/10, Honors)
+      - Computer Networks (10.0/10, Honors)
+      - Computer Architecture (10.0/10, Honors)
+      - Interaction and Interface Design (10.0/10, Honors)
+      - Business and Economics (9.6/10, Honors)
+      - Programming Project (9.5/10)
+      - Artificial Intelligence (9.0/10)
+      - Computer Graphics (9.2/10)
+      - Advanced Algorithms (7.2/10)
+      - Logic in Informatics (10.0/10, Honors)
+      - Parallelism (10.0/10, Honors)
+      - Programming Languages (8.5/10)
+      - Theory of Computation (8.4/10)
+      - Distributed Intelligent Systems (10.0/10, Honors)
+      - Senior Project at UC Irvine (9.6/10)
     key_points:
-      - Top 1 student of my cohort with a GPA 9.25/10
-      - Honors in 16 courses out of 27
-      - Elected as delegate for three courses, representing 400+ students
-      - Senior Project fulfilled as an external research internship at University of California, Irvine under the Balsells Fellowship, supervised by Professor Vijay Vazirani
+      - Ranked #1 of a cohort of nearly 400 students with a 9.27/10 GPA
+      - Awarded honors in 16 of the 27 courses taken at UPC
+      - Elected delegate for 3 courses, representing 400+ students
+      - Senior Project at UC Irvine as a Balsells Fellow, graded 9.6/10
 
-  - institution: EPFL
-    program: Exchange Program - Master's degree, Computer Science
+  - institution: École Polytechnique Fédérale de Lausanne (EPFL)
+    program: Undergraduate Exchange in Computer Science
     start_date: 2025-09
     end_date: 2026-01
     grade: 5.8/6.0
-    activities_and_societies: >
-      Equity Analyst for the Investment Society Lausanne, managing a 25k CHF
-      fund following value investing philosophies. Developed high-conviction
-      investment theses for Melexis NV and Magyar, defending them before 50+
-      members and securing the 75% majority vote for portfolio inclusion.
     description: >
-      Completed the Swiss-European Mobility exchange focused on Master-level
-      Computer Science. At the LAMP laboratory, I designed a divergence check
-      for the Scala 3 compiler supervised by Prof. Martin Odersky, replacing
-      arbitrary recursion limits with formal termination proofs.
-    coursework_highlights:
-      - Research Project in CS (6.0/6.0)
+      Undergraduate exchange semester at the École Polytechnique
+      Fédérale de Lausanne (EPFL) through the Swiss-European Mobility
+      Programme (SEMP), the Swiss counterpart of Erasmus, funded by
+      four scholarships: the SEMP grant, the Becas Santander mobility
+      scholarship from Banco Santander, the Heyning-Roelli Foundation
+      scholarship, and the MOBINT-MIF mobility grant from AGAUR, the
+      Catalan government's agency for university grants. Since EPFL's
+      Bachelor takes three years, exchange students in their fourth
+      year join Master-level courses: I completed 30 ECTS with a 5.8/6
+      GPA, curating my selection from EPFL's broad catalogue. I took
+      two courses from the Mathematics Master's, Causal Thinking and
+      Mathematical Modeling of Behavior, to sharpen my mathematical
+      maturity, and Machine Learning, spanning the field from linear
+      regression to transformers and diffusion models, to consolidate
+      foundations I had not yet studied formally. Beyond coursework,
+      I chose to take on a research project to gain hands-on
+      experience: at the Programming Methods Laboratory (LAMP) of
+      Professor Martin Odersky, the creator of Scala, I designed a
+      divergence check for the Scala 3 compiler, replacing arbitrary
+      recursion limits with formal termination criteria, graded
+      6.0/6.0. Alongside my studies, I served as an Equity Analyst at
+      the Investment Society Lausanne, pitching stocks into its
+      real-money fund.
+    coursework:
+      - Research Project in Computer Science (6.0/6.0)
       - Causal Thinking (5.75/6.0)
       - Mathematical Modeling of Behavior (5.75/6.0)
       - Machine Learning (5.5/6.0)
     key_points:
-      - Erasmus exchange during 5th semester, GPA 5.78/6 over 30 ECTS
-      - Awarded three scholarships for the exchange
+      - Completed 30 ECTS of Master-level CS courses with a 5.8/6 GPA
+      - Awarded 4 scholarships funding the exchange semester
 
   - institution: Fundació Collserola
-    program: High School Diploma, Technological High School
+    program: Baccalaureate, Technology Track
     start_date: 2020-09
     end_date: 2022-06
     grade: 8.72/10
     description: >
-      Completed high school with distinction (8.72/10) and achieved honors in
-      the university entrance exams (12.7/14).
+      Technology-track baccalaureate (Spain's two-year pre-university
+      stage) at Fundació Collserola, completed with distinction
+      (8.72/10). Earned honors in the Spanish university entrance
+      exams (PAU) with a 12.7/14.
     key_points:
-      - Achieved honors in the university entrance exams (grade 12.7 out of 14)
-      - Completed high school with distinction (grade 8.72 out of 10)
+      - Honors in the Spanish university entrance exams (PAU), 12.7/14
+      - Graduated the baccalaureate with distinction, 8.72/10
 
 projects:
   - name: Leximin Fair Core Imputation for Cooperative Games
