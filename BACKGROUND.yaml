@@ -648,6 +648,33 @@ projects:
       - Advanced from multinomial to mixed logit, formally testing each step
       - Forecast a 1.50 GBP car charge cutting driving from 41.1% to 37.7%
 
+  - name: Robust Optimization and Surrogate Modeling, Research Collaboration
+    description: >
+      Research collaboration with the Chair of Operations,
+      Economics and Strategy (OES) at the École Polytechnique
+      Fédérale de Lausanne (EPFL), conducted in a team of three as
+      the second project of the Machine Learning course (CS-433)
+      and graded 9.0/10. We implemented a robust multicriteria
+      decision-making framework from the chair's ongoing research,
+      applied to portfolio optimization under preference
+      uncertainty in high-dimensional spaces; the methods and
+      results stay confidential because the underlying research is
+      unpublished proprietary work, so this entry deliberately
+      omits detail. The work spanned the full stack: automated
+      pipelines ingesting and normalizing large-scale financial
+      time series and alternative data, constrained optimization
+      solvers (SLSQP and HiGHS) integrated into a modular Python
+      framework, neural network surrogates built with scikit-learn
+      that approximate the objective with R2 above 0.99 under
+      cross-validation, and explainability techniques extracting
+      feature significance from the resulting black-box decisions,
+      all delivered as a fully reproducible codebase.
+    key_points:
+      - Turned an EPFL chair's robust-decision research into working code
+      - Trained neural surrogates of the objective with R2 above 0.99
+      - Extracted feature significance from black-box decision models
+      - Graded 9.0/10 and kept confidential as unpublished research IP
+
   - name: CardioRisk, Heart Disease Prediction from Scratch
     github: github.com/Lluc24/CardioRisk
     description: >
