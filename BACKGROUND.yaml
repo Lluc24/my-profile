@@ -615,6 +615,30 @@ projects:
       - Shipped a zero-dependency browser party game for 3 to 10 players
       - Curated 160+ verifiable facts behind the deduction rounds
 
+  - name: Healix, Encrypted Mood Journal on the Sui Blockchain
+    github: github.com/KianBahia/SUI_Hack
+    description: >
+      Decentralized platform for sharing and tracking personal
+      emotions, built in a team of five and winner of the 1,000
+      dollar prize at the SUI Foundation Hackathon 2025 in
+      Lausanne. Users post moods and short messages publicly or
+      privately: private entries are encrypted on-chain with SEAL
+      so that only wallets on an explicit allowlist, such as a
+      patient's therapist, can ever decrypt them, keeping
+      sensitive mental health data under the author's control
+      with no off-chain storage. I built the
+      blockchain side: the Move smart contracts storing posts,
+      notes and feeds as immutable Sui objects, the allowlist and
+      subscription modules gating access, and the TypeScript
+      encrypt-decrypt flow where a session key plus a signed
+      personal message drive SEAL's on-chain approval check. The
+      Next.js frontend connects wallets through Mysten's dapp-kit
+      and renders a public community feed filterable by mood.
+    key_points:
+      - Won the SUI Foundation Hackathon 2025 with an encrypted mood journal
+      - Wrote Move contracts storing private posts as immutable Sui objects
+      - Gated decryption to allowlisted wallets via SEAL session keys
+
   - name: Transport Mode Choice Models for London
     github: github.com/Lluc24/london-mode-choice-models
     description: >
@@ -746,6 +770,29 @@ projects:
       - Swept 7 hyperparameters across 600+ logged Weights & Biases runs
       - Generalized from 2x2 to 8x8 grids, 2 to 4 agents and unseen maps
       - Graded 11.75/12 after a REINFORCE extension earned the full bonus
+
+  - name: Snap2Shop, Visual Fashion Search at HackUPC 2025
+    github: github.com/AlexGonzalezFernandez/VisualSearch-HackUPC2025
+    description: >
+      Mobile app that turns a photo of any clothing item into
+      matching products from Inditex brands such as Zara,
+      Pull&Bear and Oysho, with names, prices and purchase links;
+      built in a team of four for the Inditex Tech challenge at
+      HackUPC 2025, Europe's largest student hackathon, hosted at
+      the Universitat Politècnica de Catalunya (UPC). A Flutter
+      app snaps or picks the photo and sends it to a FastAPI
+      backend in Python that bridges Inditex's Visual Search API:
+      it uploads images to obtain the public URLs the API
+      requires, caches API and scraping responses to survive
+      hackathon rate limits, and falls back to scraping Zara's
+      site for product images. I built the Inditex API
+      integration, the image-to-URL upload path, the caching
+      layer and the favorites feature, and polished the Flutter
+      frontend.
+    key_points:
+      - Turned clothing photos into shoppable Zara products at HackUPC 2025
+      - Bridged Inditex's Visual Search API with caching to beat rate limits
+      - Built favorites and the camera flow in the Flutter mobile app
 
   - name: miniJ, Interpreter for an APL-Family Array Language
     github: github.com/Lluc24/miniJ
@@ -1011,8 +1058,9 @@ honors_and_recognition:
 
   - name: SUI Hackathon, Winner
     description: >
-      Winner of the SUI Foundation Hackathon 2025 in Lausanne with
-      Healix, a blockchain project built on the Sui network.
+      Winner of the 1,000 dollar prize at the SUI Foundation
+      Hackathon 2025 in Lausanne with Healix, an encrypted
+      mood-sharing platform built on the Sui blockchain.
 
   - name: Minister of Research and Universities, Honor Letter
     description: >
