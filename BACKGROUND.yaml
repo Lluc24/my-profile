@@ -474,7 +474,6 @@ education:
 
 projects:
   - name: Leximin Fair Core Imputation for Cooperative Games
-    repo: leximin
     github: github.com/Lluc24/leximin
     description: >
       First public Python implementation of Vijay Vazirani's combinatorial
@@ -513,7 +512,6 @@ projects:
       - Benchmarks matched theoretical O(n^5) time and O(n^2) memory bounds
 
   - name: Static Divergence Checking for Scala 3 Match Types
-    repo: divergence
     github: github.com/Lluc24/divergence
     description: >
       Research project turned language proposal for Scala 3, born at
@@ -559,7 +557,6 @@ projects:
       - Scala Improvement Process (PR #136) to define Match Types behavior
 
   - name: ClearPath, Voice Agent for Medical Intake
-    repo: yc-hack
     github: github.com/Lluc24/yc-hack
     description: >
       Voice agent replacing medical intake paperwork with a
@@ -601,7 +598,6 @@ projects:
       - Caught a silent deploy bug with 6 simulated-caller evals in Cekura
 
   - name: Factpostor, a Social Deduction Party Game
-    repo: factpostor
     github: github.com/Lluc24/factpostor
     description: >
       Web-based social deduction party game for 3 to 10 players on a
@@ -620,7 +616,6 @@ projects:
       - Curated 160+ verifiable facts behind the deduction rounds
 
   - name: Transport Mode Choice Models for London
-    repo: london-mode-choice-models
     github: github.com/Lluc24/london-mode-choice-models
     description: >
       Discrete choice analysis of how Londoners pick between
@@ -654,7 +649,6 @@ projects:
       - Forecast a 1.50 GBP car charge cutting driving from 41.1% to 37.7%
 
   - name: CardioRisk, Heart Disease Prediction from Scratch
-    repo: CardioRisk
     github: github.com/Lluc24/CardioRisk
     description: >
       Binary classifier predicting coronary heart disease risk from
@@ -691,7 +685,6 @@ projects:
       - Code rated Outstanding by EPFL course staff, with an extra bonus
 
   - name: Game-Theoretic Multi-Agent Reinforcement Learning
-    repo: multiagent-RL
     github: github.com/Lluc24/multiagent-RL
     description: >
       Study of reinforcement learning in Pogema, a partially
@@ -728,7 +721,6 @@ projects:
       - Graded 11.75/12 after a REINFORCE extension earned the full bonus
 
   - name: miniJ, Interpreter for an APL-Family Array Language
-    repo: miniJ
     github: github.com/Lluc24/miniJ
     description: >
       Complete interpreter for G, a simplified dialect of the array
@@ -762,7 +754,6 @@ projects:
       - Supported lazy evaluation, function composition and broadcasting
 
   - name: Cliff Walking, Four RL Algorithms Compared
-    repo: cliff-walking-rl
     github: github.com/Lluc24/cliff-walking-rl
     description: >
       From-scratch implementation and head-to-head comparison of
@@ -793,7 +784,6 @@ projects:
       - Diagnosed REINFORCE's collapse as gradient variance from -100 falls
 
   - name: Redflix Watch-List Planner in PDDL
-    repo: redflix-pddl-planner
     github: github.com/Lluc24/redflix-pddl-planner
     description: >
       Automated planning system that schedules a streaming
@@ -819,7 +809,6 @@ projects:
       - Stress-tested every level with Java random problem generators
 
   - name: Supermarket Shelf Layout Optimizer
-    repo: supermarket-shelf-optimizer
     github: github.com/Lluc24/supermarket-shelf-optimizer
     description: >
       Java desktop application arranging supermarket products so
@@ -850,7 +839,6 @@ projects:
       - Delivered a 3-layer desktop app with 105 tests, graded 9.5/10
 
   - name: Museum Visit Planner, a CLIPS Expert System
-    repo: museum-visit-planner
     github: github.com/Lluc24/museum-visit-planner
     description: >
       Rule-based knowledge-based system planning personalized,
@@ -885,7 +873,6 @@ projects:
       - Encoded expert knowledge as 26 production rules over 5 modules
 
   - name: Azamon Logistics Optimizer, Local Search
-    repo: logistics-optimizer
     github: github.com/Lluc24/logistics-optimizer
     description: >
       Local-search engine assigning packages to shipping offers in a
