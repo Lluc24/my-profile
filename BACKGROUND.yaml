@@ -975,20 +975,50 @@ fellowships_and_scholarships:
       Catalonia, building on the California-Catalonia Sister State Agreement.
 
   - name: Heyning-Roelli Foundation, Exchange Scholarship
-    description: Competitive merit-based scholarship supporting exchange studies at EPFL
+    description: >
+      Competitive merit-based scholarship from the Heyning-Roelli
+      Foundation, a Swiss foundation funding exchange semesters of
+      students with strong academic records, awarded for my exchange
+      at the École Polytechnique Fédérale de Lausanne (EPFL).
 
   - name: Fundación Banco Santander, Exchange Scholarship
-    description: Merit-based scholarship awarded to top Spanish university students for international exchange at EPFL
+    description: >
+      Becas Santander mobility scholarship from Fundación Banco
+      Santander, one of the world's largest corporate scholarship
+      programs, awarded on academic merit to top Spanish university
+      students for international exchange; funded my semester at the
+      École Polytechnique Fédérale de Lausanne (EPFL).
+
+  - name: ApadrinaTIC, Industry Scholarship and Mentorship, Twice Awarded
+    description: >
+      Scholarship and mentorship program of the Cercle Tecnològic
+      de Catalunya, a foundation backed by Catalan
+      technology companies, awarded to engineering students
+      selected on academic merit; I won it in two consecutive
+      editions, the 2024-25 and 2025-26 courses. Member companies
+      fund a stipend and pair each student with an industry mentor,
+      complemented by activities to know the sector from the
+      inside; in both editions I was matched with T-Systems Iberia,
+      the Iberian subsidiary of Deutsche Telekom's IT services arm.
 
 honors_and_recognition:
   - name: Universitat Politècnica de Catalunya (UPC), Highest GPA Award
-    description: Ranked #1 of nearly 400 students in the first two years of the degree program
+    description: >
+      Award for the highest GPA of the Bachelor's Degree in
+      Informatics Engineering at the Universitat Politècnica de
+      Catalunya (UPC): ranked #1 of a cohort of nearly 400 students
+      with a 9.27/10 GPA over the first two years of the program.
 
   - name: SUI Hackathon, Winner
-    description: Winner at the SUI Foundation Hackathon 2025 (Lausanne) for the Healix blockchain project
+    description: >
+      Winner of the SUI Foundation Hackathon 2025 in Lausanne with
+      Healix, a blockchain project built on the Sui network.
 
   - name: Minister of Research and Universities, Honor Letter
-    description: National recognition for outstanding results in the university entrance exam
+    description: >
+      Letter of recognition from the Minister of Research and
+      Universities for outstanding results in the Spanish university
+      entrance exams (PAU), passed with honors and a 12.7/14 mark.
 
 volunteering:
   - organization: Anegx, Viu la natura al Parc Natural de la Garrotxa
