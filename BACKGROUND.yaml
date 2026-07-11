@@ -826,32 +826,40 @@ projects:
   - name: Supermarket Shelf Layout Optimizer
     github: github.com/Lluc24/supermarket-shelf-optimizer
     description: >
-      Java desktop application arranging supermarket products so
-      that similar items sit together, maximizing cross-selling
-      value: a maximum-weight Hamiltonian path problem, the NP-hard
-      optimization twin of the Traveling Salesman Problem. Built in
-      a team of four for the Programming Project course
-      (PROP) of the Universitat Politècnica de Catalunya (UPC);
-      graded 9.5/10. The engine ships three solvers with distinct
-      trade-offs: exact backtracking with pruning, a multi-start
-      greedy heuristic, and a polynomial-time 2-approximation
-      guaranteed to land within twice the optimum. I implemented
-      the 2-approximation and every data structure beneath it by
-      hand: Kruskal's algorithm for the maximum spanning tree,
-      union-find with path compression, Hoare-partition quicksort
-      and a DFS-based Eulerian traversal shortcut into a Hamiltonian
-      path. I also built the domain facade, the application entry
-      point and presentation backbone, the main views including the
-      solution editor, and a headless CLI driver proving the
-      optimization core fully decoupled from the Swing GUI. The
+      Java 21 desktop application that arranges a supermarket
+      catalog so similar products sit side by side, milk beside
+      yogurt, beer beside chips, maximizing the cross-selling
+      value of the layout; built in a team of four for the
+      Programming Project course (PROP) of the Universitat
+      Politècnica de Catalunya (UPC) and graded 9.5/10. The
+      catalog is modeled as a complete weighted graph with 0-100
+      similarity scores on every product pair, making the layout
+      a maximum-weight Hamiltonian path problem, the NP-hard
+      optimization twin of the Traveling Salesman Problem. That
+      hardness drove the design: the engine ships three solvers
+      with distinct trade-offs, exact backtracking with pruning
+      that honors hard never-adjacent constraints, a multi-start
+      quadratic greedy for instant feedback on large catalogs,
+      and an O(n^2 log n) 2-approximation guaranteed to land
+      within twice the optimum. I implemented the 2-approximation,
+      the classic metric-TSP scheme of maximum spanning tree, tree
+      doubling, Eulerian traversal and shortcutting, with every
+      data structure beneath it built by hand: Kruskal's
+      algorithm, union-find with path compression and
+      Hoare-partition quicksort, leaving the optimization core
+      free of any algorithmic dependency. I also built the domain
+      facade, the application entry point, the Swing presentation
+      backbone, the solution-editor view and a headless CLI driver
+      proving the core runs fully decoupled from the GUI. The
       system follows a strict three-layer architecture
-      (presentation, domain, persistence) with one-way dependencies
-      and typed exceptions, verified by 105 JUnit tests and 13
-      end-to-end scripted scenarios.
+      (presentation, domain, persistence) with one-way
+      dependencies and typed exceptions, verified by 105 JUnit and
+      Mockito tests across 11 classes plus 13 scripted end-to-end
+      scenarios.
     key_points:
       - Solved NP-hard shelf layout with a provable 2-approximation in Java
       - Hand-built Kruskal, union-find and Eulerian traversal, zero libraries
-      - Delivered a 3-layer desktop app with 105 tests, graded 9.5/10
+      - Shipped a 3-layer Swing app, 105 unit + 13 e2e tests, graded 9.5/10
 
   - name: Museum Visit Planner, a CLIPS Expert System
     github: github.com/Lluc24/museum-visit-planner
