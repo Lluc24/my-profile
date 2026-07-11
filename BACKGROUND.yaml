@@ -903,33 +903,39 @@ projects:
   - name: Azamon Logistics Optimizer, Local Search
     github: github.com/Lluc24/logistics-optimizer
     description: >
-      Local-search engine assigning packages to shipping offers in a
-      simulated logistics network, minimizing cost while maximizing
-      customer happiness, built in a team of three for the
-      Artificial Intelligence course of the Universitat Politècnica
-      de Catalunya (UPC) to compare Hill Climbing and Simulated
+      Java local-search engine that assigns packages to shipping
+      offers in Azamon, a simulated Amazon-style logistics
+      network, minimizing delivery cost while maximizing customer
+      happiness; built in a team of three for the Artificial
+      Intelligence course of the Universitat Politècnica de
+      Catalunya (UPC) to compare Hill Climbing and Simulated
       Annealing head to head on the same NP-hard problem. The task
-      is a variant of the Generalized Assignment Problem with m^n
-      candidate assignments (about 10^28 for 40 packages and 5
-      offers), hard capacity and priority-deadline constraints, and
-      a user-weighted heuristic trading off total cost against
-      happiness earned by beating delivery deadlines. A state is a
-      complete assignment; move and swap operators define the
-      neighborhood and are evaluated incrementally instead of
-      recomputed from scratch, with naive and greedy strategies
-      seeding the search. Measured on a seeded 40-package instance,
-      steepest Hill Climbing converges in 26 steps while Simulated
-      Annealing takes thousands of cheap random steps but escapes
-      local optima, reaching higher happiness (22 versus 18 points)
-      at slightly higher cost, a direct view of the tradeoff the
-      heuristic weights control. Built on the AIMA-Java search
-      framework with course-provided domain classes; the state
-      representation, operators, heuristics and wiring are original
-      work.
+      is a variant of the Generalized Assignment Problem: m^n
+      candidate assignments, about 10^28 for 40 packages and 5
+      offers, under hard capacity and priority-deadline
+      constraints, scored by a user-weighted heuristic that trades
+      total cost against happiness earned by beating delivery
+      deadlines. A state is a complete assignment; move and swap
+      operators define the neighborhood and update cost
+      incrementally instead of recomputing from scratch, with
+      naive and greedy strategies seeding the search. Measured on
+      the same seeded 40-package instance, steepest Hill Climbing
+      evaluates the full neighborhood each step and converges in
+      26 steps to 391.48 EUR at 18 happiness points, while
+      Simulated Annealing takes 3,000 cheap single-neighbor steps
+      under an exponential cooling schedule and escapes local
+      optima to reach 22 happiness points at 400.85 EUR, the exact
+      cost-happiness tradeoff the heuristic weights are built to
+      control, measured on real runs. Initialization proved
+      secondary: local search erased most of the gap between naive
+      and greedy starts. Built on the AIMA-Java search framework
+      with course-provided domain classes; the state
+      representation, operators, heuristics and search wiring are
+      original work.
     key_points:
       - Compared Hill Climbing and Simulated Annealing on NP-hard assignment
       - Designed incremental move and swap operators over 10^28 assignments
-      - Quantified the cost-happiness tradeoff on seeded instances
+      - Quantified annealing's edge, 22 vs 18 happiness for 2% more cost
 
 fellowships_and_scholarships:
   - name: Balsells Fellowship, Research Scholarship
