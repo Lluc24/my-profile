@@ -513,8 +513,8 @@ projects:
       - Benchmarks matched theoretical O(n^5) time and O(n^2) memory bounds
 
   - name: Static Divergence Checking for Scala 3 Match Types
-    repo: match_types_divergence_check
-    github: github.com/Lluc24/match_types_divergence_check
+    repo: divergence
+    github: github.com/Lluc24/divergence
     description: >
       Research project turned language proposal for Scala 3, born at
       the Programming Methods Laboratory (LAMP) of the École
@@ -558,61 +558,363 @@ projects:
       - Kept the full Scala 3 test suite and ecosystem compiling unchanged
       - Scala Improvement Process (PR #136) to define Match Types behavior
 
-  - name: Coronary Heart Disease Risk Prediction
-    repo: ML_Project1
-    github: github.com/Lluc24/ML_Project1
+  - name: ClearPath, Voice Agent for Medical Intake
+    repo: yc-hack
+    github: github.com/Lluc24/yc-hack
     description: >
-      EPFL CS-433 machine learning project focused on predicting coronary heart
-      disease risk from large-scale CDC health data.
+      Voice agent replacing medical intake paperwork with a
+      conversation, built in a three-person team at the Y Combinator
+      Voice Agents Hackathon (May 2026, organized by Cekura and
+      Daily/Pipecat with NVIDIA, AWS and Twilio): patients simply
+      talk and the intake form fills itself, producing structured,
+      confirmed data in about 90 seconds. Two front-ends share one
+      Pipecat pipeline. On the web, the agent drives a live React
+      form through Pipecat 1.3.0's UI Agent protocol: the browser
+      streams its accessibility tree to the server and the agent
+      pushes commands that fill, highlight and scroll each field in
+      real time as the patient speaks. On the phone, the same agent
+      answers a Twilio call and completes the intake by voice for
+      patients without a smartphone; both channels land in a staff
+      dashboard backed by a FastAPI store. The pipeline runs NVIDIA
+      Nemotron open-weights models as both ears and brain (Nemotron
+      Speech Streaming for speech recognition, Nemotron-3-Super-120B
+      for reasoning and tool calling, at roughly 0.2 seconds to the
+      first answer token) over three runtime-selected transports:
+      browser WebRTC, Daily for cloud deployment and Twilio
+      WebSocket for telephony. We wrote spoken-number normalization
+      from scratch (spoken dates to structured values, digit-by-digit
+      parsing and read-back of IDs and phone numbers), resampled
+      8 kHz telephone audio to the 16 kHz the recognizer expects,
+      and stripped reasoning tokens the model leaked into spoken
+      output. To prove the agent beyond a happy-path demo, we built
+      an automated evaluation suite in Cekura with 6 LLM-judge
+      metrics and 6 simulated-caller scenarios (long member IDs,
+      self-corrections, adversarial callers) run against the live
+      deployment; the first run exposed a bug invisible in local
+      testing, the cloud transport silently shutting the agent down
+      on every call, and a single fix cycle took it from failing
+      every scenario to completing full intakes end to end.
     key_points:
-      - Trained and evaluated models on 328k+ samples and 321 raw features with heavy missing data and class imbalance
-      - Implemented robust preprocessing and leakage-safe cross-validation workflow, including threshold optimization
-      - Achieved final model performance of 0.868 accuracy and 0.424 F1-score (project grade: 8.5/10)
+      - Built a voice agent that fills medical intake forms as patients talk
+      - Drove a live React form from the agent via Pipecat's UI Agent protocol
+      - Served web and phone callers through one multi-transport pipeline
+      - Caught a silent deploy bug with 6 simulated-caller evals in Cekura
 
-  - name: Distributed Reinforcement Learning in Multi-Agent Environments
-    repo: multiagent-RL
-    github: github.com/Lluc24/multiagent-RL
-    description: >
-      Course project on multi-agent reinforcement learning in partially
-      observable environments, combining joint-action learning with
-      game-theoretic solution concepts.
-    key_points:
-      - Implemented and analyzed coordination strategies based on Pareto, Nash, Welfare, and Minimax solution concepts
-      - Integrated experiment tracking and sweeps to compare convergence, reward trade-offs, and generalization behavior
-      - Contributed to a high-performing delivery with bonus REINFORCE implementation (final project grade: 11.75/12)
-
-  - name: miniJ Interpreter
-    repo: miniJ
-    github: github.com/Lluc24/miniJ
-    description: >
-      Interpreter for a simplified J/APL-like language, implemented in Python
-      with ANTLR and NumPy as part of a programming languages course.
-    key_points:
-      - Built a full interpreter pipeline covering lexical, syntactic, and semantic processing for language G
-      - Structured the runtime with separate visitor and execution engine components for maintainability and scalability
-      - Delivered comprehensive test programs for arithmetic, boolean, functional, and semantic-error handling cases (grade: 10/10)
-
-  - name: Django Template with Gemini Chat Integration
-    repo: django-base
-    github: github.com/Lluc24/django-base
-    description: >
-      Extensible Django starter project with base pages, contact workflows,
-      and an AI advisor chatbot powered by Google Gemini.
-    key_points:
-      - Developed a modular Django foundation with reusable app structure for rapid project bootstrapping
-      - Added Gemini-based chat functionality with session-backed conversation flow
-      - Included production-ready baseline components (home/about/contact, forms, migrations, and clear setup docs)
-
-  - name: Factpostor Party Game
+  - name: Factpostor, a Social Deduction Party Game
     repo: factpostor
     github: github.com/Lluc24/factpostor
     description: >
-      Browser-based social deduction game for 3 to 10 players where users
-      distinguish true facts from improvised misinformation.
+      Web-based social deduction party game for 3 to 10 players on a
+      single passed-around device: each round, citizens receive a
+      true fact to defend while factpostors receive nothing and must
+      improvise believable lies, and after discussion the group
+      votes to expose them. Built solo with vanilla JavaScript, HTML
+      and CSS and zero external dependencies, so it runs offline in
+      any modern browser with no installation or backend; released
+      under the MIT license. Includes automatic role assignment, a
+      private role-reveal flow, multi-round play with persistent
+      player tracking and a hand-curated database of over 160
+      verifiable facts.
     key_points:
-      - Built a no-dependency single-device game with private role reveals, round flow, and voting mechanics
-      - Designed the gameplay/state model for repeated rounds and pass-and-play interaction
-      - Curated and integrated a 160+ fact dataset for replayability and low setup friction
+      - Shipped a zero-dependency browser party game for 3 to 10 players
+      - Curated 160+ verifiable facts behind the deduction rounds
+
+  - name: Transport Mode Choice Models for London
+    repo: london-mode-choice-models
+    github: github.com/Lluc24/london-mode-choice-models
+    description: >
+      Discrete choice analysis of how Londoners pick between
+      walking, cycling, public transport and driving, built on
+      around 5,000 revealed-preference trips from the London
+      Passenger Mode Choice survey for the Mathematical Modeling of
+      Behavior course at the École Polytechnique Fédérale de
+      Lausanne (EPFL), in a team of four; graded 6.0/6.0. Starting
+      from a multinomial logit baseline, we relaxed one assumption
+      at a time: alternative-specific time sensitivities, age
+      interactions capturing observed heterogeneity, a Box-Cox
+      transform of travel time modeling diminishing sensitivity,
+      nested and cross-nested logit structures relaxing the
+      independence of irrelevant alternatives, and a mixed logit
+      with simulated error components. Every step was accepted or
+      rejected through formal statistics (likelihood-ratio tests,
+      t-tests, AIC and BIC) rather than fit intuition, improving
+      log-likelihood from -4448 to -3966. The preferred model then
+      answered questions a transport authority would ask: market
+      shares re-weighted to the true London population through a
+      stratified-sampling correction with confidence intervals;
+      policy forecasts showing a 1.50 GBP car charge cuts driving
+      share from 41.1% to 37.7%, absorbed almost entirely by public
+      transport, while a 20% fare cut slightly increases car use;
+      value-of-time estimates; and a full matrix of direct and
+      cross price elasticities. Estimated with Biogeme, pandas and
+      NumPy in a fully narrated notebook.
+    key_points:
+      - Modeled mode choice of 5,000 London travelers, graded 6.0/6.0
+      - Advanced from multinomial to mixed logit, formally testing each step
+      - Forecast a 1.50 GBP car charge cutting driving from 41.1% to 37.7%
+
+  - name: CardioRisk, Heart Disease Prediction from Scratch
+    repo: CardioRisk
+    github: github.com/Lluc24/CardioRisk
+    description: >
+      Binary classifier predicting coronary heart disease risk from
+      328,135 health surveillance records of the CDC Behavioral Risk
+      Factor Surveillance System, built in a team of three for the
+      Machine Learning course (CS-433) at the École Polytechnique
+      Fédérale de Lausanne (EPFL), with every algorithm implemented
+      from scratch in NumPy since ML frameworks were not allowed.
+      The dataset poses real-world difficulties: 321 raw features,
+      45% missing values and a 90:10 class imbalance. We wrote
+      linear regression (gradient descent, stochastic gradient
+      descent and normal equations), ridge regression, logistic
+      regression, their L2-regularized forms and class-balanced loss
+      variants, plus a metadata-driven preprocessing pipeline
+      configured through JSON: it drops the 182 features with over
+      10% missing values, one-hot encodes categoricals, imputes and
+      standardizes continuous features, and applies 71 hand-curated
+      feature mappings drawn from the official CDC codebook.
+      Training used 5-fold cross-validation with standardization
+      computed strictly on each training fold to prevent data
+      leakage, a per-fold grid search over 100 decision thresholds
+      maximizing F1, and fold-averaged weights and thresholds for
+      the final model. An ablation across 8 model and
+      imbalance-treatment configurations selected logistic
+      regression with threshold adjustment as the best combination,
+      reaching 0.868 accuracy and 0.424 F1, and a degree-7
+      polynomial expansion study confirmed the feature-label
+      relationship is essentially linear. The code was rated
+      Outstanding by the course staff, earning an extra bonus, and
+      the report was graded 90%.
+    key_points:
+      - Predicted heart disease on 328K CDC records with pure NumPy models
+      - Beat 90:10 class imbalance via leak-free CV and threshold search
+      - Code rated Outstanding by EPFL course staff, with an extra bonus
+
+  - name: Game-Theoretic Multi-Agent Reinforcement Learning
+    repo: multiagent-RL
+    github: github.com/Lluc24/multiagent-RL
+    description: >
+      Study of reinforcement learning in Pogema, a partially
+      observable multi-agent grid world where agents must reach
+      their goals while implicitly coordinating, done in a team of
+      three for the Distributed Intelligent Systems course of the
+      Universitat Politècnica de Catalunya (UPC); graded 11.75 over
+      a maximum of 12. We implemented Joint-Action Learning with
+      game-theoretic solution concepts, computing mixed strategies
+      from Nash equilibria, Pareto optimality, welfare maximization
+      and minimax at every learning step, and added the REINFORCE
+      policy gradient as a bonus extension worth 2 extra points.
+      Rather than using the provided course skeleton, we built our
+      own experiment architecture integrated with Weights & Biases
+      and ran more than 600 logged training runs, randomly
+      searching seven hyperparameters, namely the discount factor
+      plus the maximum, minimum and decay rate of the exploration
+      and learning-rate schedules, with 100 runs per solution
+      concept and an exhaustive 126-configuration sweep for the
+      REINFORCE extension. My part covered three research
+      questions: which configurations converge best in individual
+      and collective reward, how behavior changes across solution
+      concepts, and whether agents trained on different solution
+      concepts can still coordinate. Further experiments compared
+      joint-action learning against independent Q-learning and
+      tested generalization from 2x2 up to 8x8 maps, two to four
+      agents, and previously unseen layouts. A dependency conflict
+      between Pogema and Weights & Biases was solved by running two
+      virtual environments communicating through serialized files.
+    key_points:
+      - Trained agents with Nash, Pareto, minimax and welfare strategies
+      - Swept 7 hyperparameters across 600+ logged Weights & Biases runs
+      - Generalized from 2x2 to 8x8 grids, 2 to 4 agents and unseen maps
+      - Graded 11.75/12 after a REINFORCE extension earned the full bonus
+
+  - name: miniJ, Interpreter for an APL-Family Array Language
+    repo: miniJ
+    github: github.com/Lluc24/miniJ
+    description: >
+      Complete interpreter for G, a simplified dialect of the array
+      language J (the ASCII successor of APL, created by Turing
+      Award winner Kenneth Iverson), built with Python, ANTLR and
+      NumPy for the Languages and Programming Paradigms course of
+      the Bachelor's Degree in Informatics Engineering at the
+      Universitat Politècnica de Catalunya (UPC); graded 10/10. I
+      implemented the whole language pipeline end to end: an ANTLR
+      grammar handling right-associative, right-to-left expression
+      evaluation, lexical and syntactic analysis, abstract syntax
+      tree construction, semantic checking and a tree-walking
+      evaluator. The language supports arithmetic, relational and
+      boolean operators over whole vectors, scalar-to-vector
+      broadcasting, list operations (concatenation, filtering,
+      indexing, iota), adverbs such as fold and reflex, and
+      first-class user-defined functions composable into new ones.
+      The architecture separates three decoupled layers (a driver,
+      an AST visitor with symbol tables and an operand stack, and a
+      NumPy-backed execution engine), so the numeric backend could
+      be swapped without touching interpreter logic. Function
+      bodies store their AST and evaluate lazily on application,
+      and operators requiring matching operand lengths return
+      closures that validate sizes at call time, turning length
+      mismatches into clear semantic errors instead of crashes.
+      Ships six reproducible test suites diffed against golden
+      output files by a one-command runner.
+    key_points:
+      - Built a full interpreter for an APL-family language, graded 10/10
+      - Designed the grammar, AST visitor and NumPy engine as decoupled layers
+      - Supported lazy evaluation, function composition and broadcasting
+
+  - name: Cliff Walking, Four RL Algorithms Compared
+    repo: cliff-walking-rl
+    github: github.com/Lluc24/cliff-walking-rl
+    description: >
+      From-scratch implementation and head-to-head comparison of
+      four reinforcement learning algorithms (Value Iteration,
+      Direct Estimation, Q-Learning and REINFORCE) on Gymnasium's
+      Cliff Walking environment, coursework in a team of three at
+      the Universitat Politècnica de Catalunya (UPC). The
+      environment punishes falling off the cliff with -100 against
+      -1 per step, making the reward landscape spiky enough to
+      separate algorithm families. Every agent exposes sweep and run
+      commands, all experiments log to Weights & Biases for
+      hyperparameter-importance analysis, and learned policies are
+      rendered as per-tile action maps. Value Iteration recovers the
+      exact optimal policy (-63 expected reward) given the full
+      model; Direct Estimation reconstructs the transition and
+      reward functions from random trajectories and plans on the
+      estimate; Q-Learning, model-free and off-policy with annealed
+      exploration and learning rates, converges near the optimum at
+      about -70. REINFORCE stalls around -200, and the analysis
+      explains why: the -100 penalty makes returns so large and
+      high-variance that the policy gradient cannot separate good
+      actions from bad ones, and only short-horizon low-discount
+      configurations mitigate the collapse. A concrete study of
+      matching algorithm choice to reward structure.
+    key_points:
+      - Implemented four RL algorithms from scratch on a spiky-reward task
+      - Recovered the exact optimum and near-optimal model-free policies
+      - Diagnosed REINFORCE's collapse as gradient variance from -100 falls
+
+  - name: Redflix Watch-List Planner in PDDL
+    repo: redflix-pddl-planner
+    github: github.com/Lluc24/redflix-pddl-planner
+    description: >
+      Automated planning system that schedules a streaming
+      watch-list across the week, respecting narrative prerequisite
+      chains, crossover episodes that must be watched together, and
+      the viewer's daily free time. Built as a team project in
+      classical, domain-independent planning for the Artificial
+      Intelligence course of the Universitat Politècnica de
+      Catalunya (UPC): the problem is modeled from scratch in PDDL
+      and solved with the Metric-FF planner. The domain grew through
+      four incremental extensions, adding one real-world constraint
+      at a time: from single prerequisites and one title per day, to
+      arbitrary prerequisite chains, to parallel content that must
+      land on the same or adjacent days, to a hard cap of three
+      titles per day, and finally to a 200-minute daily budget
+      expressed with PDDL numeric fluents over each title's
+      duration. Every level ships a hand-crafted example problem
+      plus a Java random problem generator used to stress-test the
+      domain, with solved plans recorded for verification.
+    key_points:
+      - Modeled weekly watch-list scheduling in PDDL, solved with Metric-FF
+      - Extended the domain 4 times up to fluent-based daily time budgets
+      - Stress-tested every level with Java random problem generators
+
+  - name: Supermarket Shelf Layout Optimizer
+    repo: supermarket-shelf-optimizer
+    github: github.com/Lluc24/supermarket-shelf-optimizer
+    description: >
+      Java desktop application arranging supermarket products so
+      that similar items sit together, maximizing cross-selling
+      value: a maximum-weight Hamiltonian path problem, the NP-hard
+      optimization twin of the Traveling Salesman Problem. Built in
+      a team of four for the Programming Project course
+      (PROP) of the Universitat Politècnica de Catalunya (UPC);
+      graded 9.5/10. The engine ships three solvers with distinct
+      trade-offs: exact backtracking with pruning, a multi-start
+      greedy heuristic, and a polynomial-time 2-approximation
+      guaranteed to land within twice the optimum. I implemented
+      the 2-approximation and every data structure beneath it by
+      hand: Kruskal's algorithm for the maximum spanning tree,
+      union-find with path compression, Hoare-partition quicksort
+      and a DFS-based Eulerian traversal shortcut into a Hamiltonian
+      path. I also built the domain facade, the application entry
+      point and presentation backbone, the main views including the
+      solution editor, and a headless CLI driver proving the
+      optimization core fully decoupled from the Swing GUI. The
+      system follows a strict three-layer architecture
+      (presentation, domain, persistence) with one-way dependencies
+      and typed exceptions, verified by 105 JUnit tests and 13
+      end-to-end scripted scenarios.
+    key_points:
+      - Solved NP-hard shelf layout with a provable 2-approximation in Java
+      - Hand-built Kruskal, union-find and Eulerian traversal, zero libraries
+      - Delivered a 3-layer desktop app with 105 tests, graded 9.5/10
+
+  - name: Museum Visit Planner, a CLIPS Expert System
+    repo: museum-visit-planner
+    github: github.com/Lluc24/museum-visit-planner
+    description: >
+      Rule-based knowledge-based system planning personalized,
+      multi-day itineraries through the Museo del Prado from a
+      visitor's time budget, group composition, art knowledge and
+      preferences, built in a team of three for the Artificial
+      Intelligence course of the Universitat Politècnica de
+      Catalunya (UPC). Choosing which artworks to see, in what order
+      and through which rooms under a time budget is a variant of
+      the NP-hard Orienteering Problem, so instead of exhaustive
+      search the system applies heuristic classification: it
+      abstracts the concrete request into a problem archetype, maps
+      it to a solution archetype (touristic versus intellectual
+      visit, viewing pace) and refines that into a concrete
+      day-by-day route. The domain lives in an OWL ontology authored
+      in Protégé covering the 75 most representative Prado artworks
+      with their painters, movements, eras and themes, distributed
+      across 10 rooms with an explicit adjacency graph, and
+      translated automatically into CLIPS object definitions so one
+      knowledge model drives both design and runtime. Reasoning is
+      organized into five CLIPS modules handing control to one
+      another; the refinement module alone encodes 26 production
+      rules combining preferences, visit styles and room adjacency,
+      prioritizing popular works for touristic visits and complex
+      ones for intellectual visits while planning rest breaks for
+      children and retirees. Eight recorded scenarios, from family
+      visits to stress tests, double as regression tests for the
+      rule base.
+    key_points:
+      - Planned personalized Prado itineraries with a CLIPS expert system
+      - Modeled 75 artworks and a 10-room adjacency graph as an OWL ontology
+      - Encoded expert knowledge as 26 production rules over 5 modules
+
+  - name: Azamon Logistics Optimizer, Local Search
+    repo: logistics-optimizer
+    github: github.com/Lluc24/logistics-optimizer
+    description: >
+      Local-search engine assigning packages to shipping offers in a
+      simulated logistics network, minimizing cost while maximizing
+      customer happiness, built in a team of three for the
+      Artificial Intelligence course of the Universitat Politècnica
+      de Catalunya (UPC) to compare Hill Climbing and Simulated
+      Annealing head to head on the same NP-hard problem. The task
+      is a variant of the Generalized Assignment Problem with m^n
+      candidate assignments (about 10^28 for 40 packages and 5
+      offers), hard capacity and priority-deadline constraints, and
+      a user-weighted heuristic trading off total cost against
+      happiness earned by beating delivery deadlines. A state is a
+      complete assignment; move and swap operators define the
+      neighborhood and are evaluated incrementally instead of
+      recomputed from scratch, with naive and greedy strategies
+      seeding the search. Measured on a seeded 40-package instance,
+      steepest Hill Climbing converges in 26 steps while Simulated
+      Annealing takes thousands of cheap random steps but escapes
+      local optima, reaching higher happiness (22 versus 18 points)
+      at slightly higher cost, a direct view of the tradeoff the
+      heuristic weights control. Built on the AIMA-Java search
+      framework with course-provided domain classes; the state
+      representation, operators, heuristics and wiring are original
+      work.
+    key_points:
+      - Compared Hill Climbing and Simulated Annealing on NP-hard assignment
+      - Designed incremental move and swap operators over 10^28 assignments
+      - Quantified the cost-happiness tradeoff on seeded instances
 
 fellowships_and_scholarships:
   - name: Balsells Fellowship, Research Scholarship
