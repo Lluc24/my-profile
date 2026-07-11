@@ -756,32 +756,39 @@ projects:
   - name: Cliff Walking, Four RL Algorithms Compared
     github: github.com/Lluc24/cliff-walking-rl
     description: >
-      From-scratch implementation and head-to-head comparison of
-      four reinforcement learning algorithms (Value Iteration,
-      Direct Estimation, Q-Learning and REINFORCE) on Gymnasium's
-      Cliff Walking environment, coursework in a team of three at
-      the Universitat Politècnica de Catalunya (UPC). The
-      environment punishes falling off the cliff with -100 against
-      -1 per step, making the reward landscape spiky enough to
-      separate algorithm families. Every agent exposes sweep and run
-      commands, all experiments log to Weights & Biases for
-      hyperparameter-importance analysis, and learned policies are
-      rendered as per-tile action maps. Value Iteration recovers the
-      exact optimal policy (-63 expected reward) given the full
-      model; Direct Estimation reconstructs the transition and
-      reward functions from random trajectories and plans on the
-      estimate; Q-Learning, model-free and off-policy with annealed
-      exploration and learning rates, converges near the optimum at
-      about -70. REINFORCE stalls around -200, and the analysis
-      explains why: the -100 penalty makes returns so large and
-      high-variance that the policy gradient cannot separate good
-      actions from bad ones, and only short-horizon low-discount
-      configurations mitigate the collapse. A concrete study of
-      matching algorithm choice to reward structure.
+      Head-to-head comparison of four reinforcement learning
+      algorithms, Value Iteration, Direct Estimation, Q-Learning
+      and REINFORCE, each implemented from scratch in Python with
+      NumPy on Gymnasium's Cliff Walking environment, coursework
+      in a team of three at the Universitat Politècnica de
+      Catalunya (UPC). The environment is a 4x12 grid where the
+      agent starts at the bottom-left corner and must reach the
+      bottom-right goal while skirting a cliff that spans the
+      whole bottom edge; every step costs -1 and falling costs
+      -100 and teleports the agent back to the start. The shortest
+      path takes 13 steps, but we used the slippery variant, where
+      the agent moves in the intended direction only one time in
+      three, which drops the optimal expected return from -13 to
+      -63. Value Iteration, given full access to the MDP, recovers
+      the exact -63 optimum and serves as the ground truth; Direct
+      Estimation reconstructs the transition and reward model from
+      random trajectories and plans to a near-optimal policy;
+      model-free Q-Learning with annealed exploration and learning
+      rates converges to about -70, within 11% of the optimum; and
+      REINFORCE stalls near -200 even after a random search over a
+      72,000-combination space of six hyperparameters. The report
+      traces that failure to the reward structure: the -100
+      penalty makes returns so high-variance that the policy
+      gradient cannot tell good actions from bad, and only
+      short-horizon, low-discount settings soften the collapse.
+      Every agent exposes sweep and run commands, all experiments
+      log to Weights & Biases for hyperparameter-importance
+      analysis, and learned policies render as per-tile action
+      maps.
     key_points:
-      - Implemented four RL algorithms from scratch on a spiky-reward task
-      - Recovered the exact optimum and near-optimal model-free policies
-      - Diagnosed REINFORCE's collapse as gradient variance from -100 falls
+      - Implemented 4 RL algorithm families from scratch in Python and NumPy
+      - Reached within 11% of the exact optimum with model-free Q-Learning
+      - Explored a 72,000-config hyperparameter space with W&B sweeps
 
   - name: Redflix Watch-List Planner in PDDL
     github: github.com/Lluc24/redflix-pddl-planner
