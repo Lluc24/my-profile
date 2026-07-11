@@ -864,36 +864,41 @@ projects:
   - name: Museum Visit Planner, a CLIPS Expert System
     github: github.com/Lluc24/museum-visit-planner
     description: >
-      Rule-based knowledge-based system planning personalized,
-      multi-day itineraries through the Museo del Prado from a
+      Rule-based expert system that plans a personalized,
+      multi-day itinerary through the Museo del Prado from a
       visitor's time budget, group composition, art knowledge and
       preferences, built in a team of three for the Artificial
       Intelligence course of the Universitat Politècnica de
-      Catalunya (UPC). Choosing which artworks to see, in what order
-      and through which rooms under a time budget is a variant of
-      the NP-hard Orienteering Problem, so instead of exhaustive
-      search the system applies heuristic classification: it
-      abstracts the concrete request into a problem archetype, maps
-      it to a solution archetype (touristic versus intellectual
-      visit, viewing pace) and refines that into a concrete
-      day-by-day route. The domain lives in an OWL ontology authored
-      in Protégé covering the 75 most representative Prado artworks
-      with their painters, movements, eras and themes, distributed
-      across 10 rooms with an explicit adjacency graph, and
-      translated automatically into CLIPS object definitions so one
-      knowledge model drives both design and runtime. Reasoning is
-      organized into five CLIPS modules handing control to one
-      another; the refinement module alone encodes 26 production
-      rules combining preferences, visit styles and room adjacency,
-      prioritizing popular works for touristic visits and complex
-      ones for intellectual visits while planning rest breaks for
-      children and retirees. Eight recorded scenarios, from family
-      visits to stress tests, double as regression tests for the
-      rule base.
+      Catalunya (UPC). Choosing which artworks to see, in what
+      order and through which rooms under a time budget is a
+      variant of the NP-hard Orienteering Problem, so instead of
+      searching, the system reasons like a museum guide: heuristic
+      classification abstracts the concrete request into a problem
+      archetype, maps it to a solution archetype (touristic versus
+      intellectual visit, viewing pace) and refines that into a
+      day-by-day route. The domain lives in a Web Ontology
+      Language (OWL) ontology authored in Protégé, covering the 75
+      most representative Prado artworks with their painters,
+      movements, eras and themes across 10 rooms with an explicit
+      adjacency graph; the owl2clips converter translates it into
+      object definitions for CLIPS (C Language Integrated
+      Production System), whose forward-chaining Rete engine fires
+      the rules, so a single knowledge model drives both design
+      and runtime. Reasoning splits into five CLIPS modules
+      handing control to one another; the refinement module alone
+      encodes 26 production rules combining preferences, visit
+      styles and room adjacency, prioritizing popular works for
+      touristic visits and complex ones for intellectual visits,
+      and planning rest breaks for children and retirees. Given a
+      family of four with children and retirees, one day and six
+      hours, the system schedules 18 artworks across 3 adjacent
+      rooms at a popularity-weighted pace; 8 recorded scenarios,
+      from an express visit to a stress test, replay through the
+      interpreter as regression tests for the rule base.
     key_points:
       - Planned personalized Prado itineraries with a CLIPS expert system
       - Modeled 75 artworks and a 10-room adjacency graph as an OWL ontology
-      - Encoded expert knowledge as 26 production rules over 5 modules
+      - Encoded 26 expert rules over 5 modules, verified by 8 replay tests
 
   - name: Azamon Logistics Optimizer, Local Search
     github: github.com/Lluc24/logistics-optimizer
