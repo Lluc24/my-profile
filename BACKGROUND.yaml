@@ -681,8 +681,8 @@ projects:
       the report was graded 90%.
     key_points:
       - Predicted heart disease on 328K CDC records with pure NumPy models
-      - Beat 90:10 class imbalance via leak-free CV and threshold search
-      - Code rated Outstanding by EPFL course staff, with an extra bonus
+      - Hit 0.868 accuracy and 0.424 F1 despite a 90:10 class imbalance
+      - Code rated Outstanding with an extra bonus by EPFL course staff
 
   - name: Game-Theoretic Multi-Agent Reinforcement Learning
     github: github.com/Lluc24/multiagent-RL
