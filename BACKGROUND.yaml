@@ -793,27 +793,35 @@ projects:
   - name: Redflix Watch-List Planner in PDDL
     github: github.com/Lluc24/redflix-pddl-planner
     description: >
-      Automated planning system that schedules a streaming
-      watch-list across the week, respecting narrative prerequisite
-      chains, crossover episodes that must be watched together, and
-      the viewer's daily free time. Built as a team project in
-      classical, domain-independent planning for the Artificial
-      Intelligence course of the Universitat Politècnica de
-      Catalunya (UPC): the problem is modeled from scratch in PDDL
-      and solved with the Metric-FF planner. The domain grew through
-      four incremental extensions, adding one real-world constraint
-      at a time: from single prerequisites and one title per day, to
-      arbitrary prerequisite chains, to parallel content that must
-      land on the same or adjacent days, to a hard cap of three
-      titles per day, and finally to a 200-minute daily budget
-      expressed with PDDL numeric fluents over each title's
-      duration. Every level ships a hand-crafted example problem
-      plus a Java random problem generator used to stress-test the
-      domain, with solved plans recorded for verification.
+      Automated planning system that turns a streaming watch-list
+      into a valid weekly viewing schedule, built as a team project
+      for the Artificial Intelligence course of the Universitat
+      Politècnica de Catalunya (UPC). Shared-universe catalogs
+      impose real constraints: titles that must follow narrative
+      order, crossover episodes that only make sense watched
+      together, and limited free time each night. Instead of
+      hand-coding a scheduler, we modeled the problem declaratively
+      in the Planning Domain Definition Language (PDDL) with
+      typing, Action Description Language (ADL) constructs and
+      numeric fluents, and let the off-the-shelf Metric-FF planner
+      do the searching: two actions, one pulling a title and its
+      full prerequisite closure into the schedule and one assigning
+      it a day, are enough to express every rule. The domain
+      hardened across five levels, each adding one constraint:
+      from single prerequisites and one title per day, to arbitrary
+      prerequisite chains, to parallel content forced onto the same
+      or adjacent days, to a three-title daily cap, and finally to
+      a 200-minute nightly budget computed with fluents over each
+      title's runtime, tight enough to pack a 121-minute Star Wars
+      film and a 54-minute Breaking Bad episode into one 175-minute
+      Friday. Every level ships a hand-crafted example with its
+      solved plan plus an interactive Java generator emitting
+      random problems of any chosen size, used to stress-test the
+      domain beyond the curated cases.
     key_points:
-      - Modeled weekly watch-list scheduling in PDDL, solved with Metric-FF
-      - Extended the domain 4 times up to fluent-based daily time budgets
-      - Stress-tested every level with Java random problem generators
+      - Encoded an entire watch-list scheduler in 2 declarative PDDL actions
+      - Solved 200-minute nightly budgets with Metric-FF numeric fluents
+      - Stress-tested 5 domain levels with Java random problem generators
 
   - name: Supermarket Shelf Layout Optimizer
     github: github.com/Lluc24/supermarket-shelf-optimizer
