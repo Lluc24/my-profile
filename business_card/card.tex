@@ -1,79 +1,362 @@
+% Business card — terminal/hacker aesthetic, light theme.
+% Compile with:  lualatex card.tex   (requires fontspec; LuaLaTeX or XeLaTeX only)
+%
+% All geometry is in millimetres. TikZ is set to x=1mm,y=1mm below so every
+% bare coordinate number in the pictures IS a millimetre — no unit suffixes,
+% no "in", no mixed-unit arithmetic bugs.
 \documentclass[tikz,border=0mm]{standalone}
 \usepackage{graphicx}
-\usepackage{fontawesome5}
-\usepackage[sfdefault]{inter}
-\usepackage[T1]{fontenc}
-\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{tikz}
 
-\definecolor{bluecard}{RGB}{30,144,255}
+% ---------------------------------------------------------------------------
+% Font selection: monospace only, with a real fallback chain. fontspec's
+% \IfFontExistsTF checks the system font database (fontconfig) at compile
+% time, so this never silently drops to a serif — the last resort is still
+% a mono face (DejaVu Sans Mono ships with virtually every TeX/Linux install).
+% ---------------------------------------------------------------------------
+\IfFontExistsTF{JetBrains Mono}
+  {\setmainfont{JetBrains Mono}}
+  {\IfFontExistsTF{Fira Code}
+    {\setmainfont{Fira Code}}
+    {\IfFontExistsTF{IBM Plex Mono}
+      {\setmainfont{IBM Plex Mono}}
+      {\setmainfont{DejaVu Sans Mono}}}}
+
+% Separate semi-bold face for the window title, mirroring the same fallback
+% chain. If no semibold-named static instance exists anywhere in the chain,
+% \semiboldfont just falls back to \bfseries of whichever main font loaded
+% above (still bold, never a different family, never a serif).
+\IfFontExistsTF{JetBrains Mono SemiBold}
+  {\newfontfamily\semiboldfont{JetBrains Mono SemiBold}}
+  {\IfFontExistsTF{Fira Code SemiBold}
+    {\newfontfamily\semiboldfont{Fira Code SemiBold}}
+    {\IfFontExistsTF{IBM Plex Mono SemiBold}
+      {\newfontfamily\semiboldfont{IBM Plex Mono SemiBold}}
+      {\let\semiboldfont\bfseries}}}
+
+% Ligature-free instance of the same main font, for spots where the font's
+% own "calt"/"liga" tables would otherwise silently rewrite plain ASCII --
+% e.g. turning a typed "->" into a rendered arrow, or fusing a run of "-"
+% characters into one long dash. IMPORTANT: \addfontfeature mid-paragraph
+% does NOT reliably turn "calt" off (verified empirically -- a scoped
+% \addfontfeature left contextual ligatures untouched while a fresh
+% \fontspec/\newfontfamily declaration did not), so this needs its own
+% \newfontfamily rather than an inline feature toggle.
+\IfFontExistsTF{JetBrains Mono}
+  {\newfontfamily\noligfont[RawFeature={-calt;-liga}]{JetBrains Mono}}
+  {\IfFontExistsTF{Fira Code}
+    {\newfontfamily\noligfont[RawFeature={-calt;-liga}]{Fira Code}}
+    {\IfFontExistsTF{IBM Plex Mono}
+      {\newfontfamily\noligfont[RawFeature={-calt;-liga}]{IBM Plex Mono}}
+      {\newfontfamily\noligfont[RawFeature={-calt;-liga}]{DejaVu Sans Mono}}}}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+
+% ---------------------------------------------------------------------------
+% Palette — light terminal theme, colors pulled from GitHub Light (chosen
+% over Solarized Light / Catppuccin Latte because its accent hues are the
+% only ones of the three that clear 4.5:1 against a light background — see
+% the contrast table below, measured with the standard WCAG formula).
+%
+% cardbg is plain #FFFFFF -- deliberately NOT an off-white/warm tint. Print
+% shops often bill "background color" as full-bleed ink coverage regardless
+% of hue; #FFFFFF prints as no ink at all on white stock, i.e. the bare
+% paper color, so this card doesn't pay for a custom near-white.
+%
+%   color                  hex       vs #FFFFFF card bg   used for
+%   -----------------------------------------------------------------------
+%   cardbg      #FFFFFF      —                    card background (bare paper)
+%   headerbg    #EBEBEB      1.09 vs cardbg        chrome bar fill (decorative)
+%   headerborder#D0D0D0      —                     chrome bar 1px bottom rule
+%   bodycolor   #1F2328    15.80                    body text, window title
+%   mutedtext   #656D76     5.25                    secondary/dim lines
+%   accent      #1A7F37     5.08                    primary accent (green)
+%   ruleline    #C8C8C8      —                      fastfetch separator (decorative)
+%   cropcolor   #B4B4B4      —                      faint crop-mark gray (decorative)
+%
+% accent and mutedtext both clear 4.5:1 against the card background; the
+% two backgrounds (cardbg/headerbg) and the two rule colors are decorative
+% fills/lines, not text, so they aren't held to the text contrast target.
+% bluecard (the pass-1 legacy accent) is dropped: the fastfetch spec calls
+% for exactly one accent color for every key, so a second accent had no use
+% left in this layout.
+% ---------------------------------------------------------------------------
+\definecolor{cardbg}{RGB}{255,255,255}
+\definecolor{headerbg}{RGB}{235,235,235}
+\definecolor{headerborder}{RGB}{208,208,208}
+\definecolor{bodycolor}{RGB}{31,35,40}
+\definecolor{mutedtext}{RGB}{101,109,118}
+\definecolor{accent}{RGB}{26,127,55}
+\definecolor{ruleline}{RGB}{200,200,200}
+\definecolor{cropcolor}{RGB}{180,180,180}
+% winctrlbg/winctrlicon sampled directly from a real GNOME headerbar
+% screenshot (Screenshot from 2026-07-19 18-34-48.png): each of the three
+% window-control glyphs sits on its own subtle circular "chip", a shade
+% darker than the headerbar itself -- decorative, not held to text contrast.
+\definecolor{winctrlbg}{RGB}{218,218,218}
+\definecolor{winctrlicon}{RGB}{61,61,61}
+
+% ---------------------------------------------------------------------------
+% Crop marks toggle. The canvas below IS the bleed area (there's no extra
+% sheet margin beyond it), so these are short faint ticks sitting in the
+% bleed band at each trim corner rather than full press-standard crop marks
+% extended onto a larger sheet. Flip to \showcropmarksfalse to hide them.
+% ---------------------------------------------------------------------------
+\newif\ifshowcropmarks
+\showcropmarkstrue
+
+% Draws the 8 corner ticks for the currently-defined \cardwidth/\cardheight/
+% \bleed/\fullwidth/\fullheight, in the OUTER (full-canvas) coordinate frame,
+% i.e. call this before/after the \bleed-shifted scope, not inside it.
+\newcommand{\drawcropmarks}{%
+  \ifshowcropmarks
+    \draw[cropcolor, line width=0.08mm]
+      % bottom-left trim corner (\bleed,\bleed)
+      (0,\bleed) -- (\bleed-0.5,\bleed)
+      (\bleed,0) -- (\bleed,\bleed-0.5)
+      % bottom-right trim corner (\fullwidth-\bleed,\bleed)
+      (\fullwidth,\bleed) -- (\fullwidth-\bleed+0.5,\bleed)
+      (\fullwidth-\bleed,0) -- (\fullwidth-\bleed,\bleed-0.5)
+      % top-left trim corner
+      (0,\fullheight-\bleed) -- (\bleed-0.5,\fullheight-\bleed)
+      (\bleed,\fullheight) -- (\bleed,\fullheight-\bleed+0.5)
+      % top-right trim corner
+      (\fullwidth,\fullheight-\bleed) -- (\fullwidth-\bleed+0.5,\fullheight-\bleed)
+      (\fullwidth-\bleed,\fullheight) -- (\fullwidth-\bleed,\fullheight-\bleed+0.5);
+  \fi
+}
+
+% ---------------------------------------------------------------------------
+% Adwaita-style headerbar, shared by both faces so the chrome only has to be
+% tuned in one place. Takes the titlebar text (e.g. "lluc@card: ~/front") as
+% its argument. Must be called from inside the \bleed-shifted scope, after
+% the card-body background fill, so the bar paints on top of it.
+% Reads \cardwidth/\cardheight/\bleed/\barheight/\safemargin from the caller.
+% ---------------------------------------------------------------------------
+\newcommand{\headerbar}[1]{%
+  % bar fill, bleeding to the top/side edges
+  \fill[headerbg] (-\bleed,\cardheight-\barheight) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
+  % 1px bottom border separating the bar from the card body
+  \draw[headerborder, line width=0.25mm]
+    (-\bleed,\cardheight-\barheight) -- (\cardwidth+\bleed,\cardheight-\barheight);
+  % centered semi-bold window title
+  \node[anchor=center] at (\cardwidth/2,\cardheight-\barheight/2) {%
+    \fontsize{7}{8}\selectfont\semiboldfont\color{bodycolor} #1%
+  };
+  % three window controls, right-aligned in GTK order (minimize, maximize,
+  % close), each on its own circular "chip" -- this whole treatment
+  % (colors, chip size, icon weight, pitch) was matched directly against a
+  % real GNOME headerbar screenshot rather than guessed. Minimize/maximize
+  % are drawn as plain TikZ shapes -- a short dash, a small square outline
+  % -- rather than font glyphs, since JetBrains Mono's coverage of
+  % window-control symbols isn't guaranteed; close stays \texttimes
+  % (multiplication sign), a standard text symbol already confirmed to
+  % render correctly.
+  \def\winctrly{\cardheight-\barheight/2}
+  \def\winctrlsize{1.6}     % dash length / square side, mm
+  \def\winctrlradius{2.5}   % chip circle radius, mm
+  \def\winctrlpitch{6}      % spacing between chip centers, mm
+  \def\closex{\cardwidth-\safemargin-\winctrlradius}
+  \def\maximizex{\closex-\winctrlpitch}
+  \def\minimizex{\maximizex-\winctrlpitch}
+  % chip backgrounds, drawn first so the icons sit on top of them
+  \fill[winctrlbg] (\minimizex,\winctrly) circle (\winctrlradius);
+  \fill[winctrlbg] (\maximizex,\winctrly) circle (\winctrlradius);
+  \fill[winctrlbg] (\closex,\winctrly) circle (\winctrlradius);
+  % minimize -- short horizontal dash
+  \draw[winctrlicon, line width=0.3mm]
+    (\minimizex-\winctrlsize/2,\winctrly) -- (\minimizex+\winctrlsize/2,\winctrly);
+  % maximize -- small square outline
+  \draw[winctrlicon, line width=0.25mm]
+    (\maximizex-\winctrlsize/2,\winctrly-\winctrlsize/2) rectangle (\maximizex+\winctrlsize/2,\winctrly+\winctrlsize/2);
+  % close -- sized up from the original 7.5pt (and set bold) so its visual
+  % weight matches the dash/square, which are drawn at a fixed mm stroke
+  % width rather than scaling with a font size
+  \node[anchor=center] at (\closex,\winctrly) {%
+    \fontsize{11}{12}\selectfont\bfseries\color{winctrlicon} \texttimes%
+  };
+}
 
 \begin{document}
 
-\begin{tikzpicture}
-    \def\cardwidth{3.5in}
-    \def\cardheight{2in}
-    \def\bleed{0.125in}
-    \def\fullwidth{3.75in}
-    \def\fullheight{2.25in}
+% =============================================================================
+% FRONT — fastfetch-style layout: ASCII logo on the left, key/value system-
+% info-style block on the right ("lluc@card" header, rule, nine rows).
+% =============================================================================
+\begin{tikzpicture}[x=1mm,y=1mm]
+    % --- length macros (all millimetres; European card size, 3mm bleed) ---
+    \def\cardwidth{85}    % trim width
+    \def\cardheight{55}   % trim height
+    \def\bleed{3}         % bleed on every side
+    \def\fullwidth{91}    % \cardwidth + 2*\bleed
+    \def\fullheight{61}   % \cardheight + 2*\bleed
+    \def\safemargin{4}    % keep text/critical elements this far from trim edge
+    \def\barheight{8}     % height of the window-chrome bar, measured from trim top
 
     \useasboundingbox (0,0) rectangle (\fullwidth,\fullheight);
+
     \begin{scope}[shift={(\bleed,\bleed)}]
-    \fill[white] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
+    % local origin is now the trim corner; trim rect is (0,0)--(\cardwidth,\cardheight)
 
-    \fill[black] (2in,\cardheight+\bleed) -- (\cardwidth+\bleed,\cardheight+\bleed) -- (\cardwidth+\bleed,1.5) -- cycle;
+    % background bleeds all the way to the cut edge
+    \fill[cardbg] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
 
-    \fill[black] (2in,-\bleed) -- (3.5in,\cardheight+\bleed) -- (\cardwidth+\bleed,-\bleed) -- cycle;
+    \headerbar{lluc@card: \textasciitilde/front}
 
-    \fill[bluecard] (2.3in,-\bleed) -- (\cardwidth+\bleed,-\bleed) -- (\cardwidth+\bleed,\cardheight+\bleed) -- cycle;
+    % -------------------------------------------------------------------
+    % fastfetch column geometry (all in mm, measured from the trim corner):
+    %   logo column  : x = 4  .. 21    (17mm wide -- the longest art line is
+    %                                   11 chars at 7pt/JetBrains's 0.6em
+    %                                   advance width = ~16.3mm, so 17mm
+    %                                   gives a little slack. A narrower box
+    %                                   here made the art overflow into the
+    %                                   info column instead of wrapping.)
+    %                  vertically centered, together with the info column,
+    %                  on \contentcentery (see below).
+    %   gap          : x = 21 .. 25    (4mm -- widened on request for more
+    %                                   breathing room between the two
+    %                                   columns; was 1.5mm)
+    %   info column  : x = 25 .. 81    (56mm wide, ends exactly on the 4mm
+    %                                   right safe margin: 81 = 85-4),
+    %                  vertically centered on \contentcentery too, so the
+    %                  whole front face (dog + lluc@card + rows) sits in
+    %                  the middle of the space between the header bar and
+    %                  the bottom safe margin, rather than pinned to the
+    %                  top of it.
+    %   key label width inside the info column: 11mm (fits "Company", the
+    %   longest key, with room to spare) via \makebox[11mm][l]{...}, leaving
+    %   45mm for values at \fontsize{6.3} -- the longest
+    %   ("linkedin.com/in/lluc-santamaria", 32 chars at 6.3pt = ~43mm)
+    %   still clears it with margin. (Row font dropped from 6.5pt to 6.3pt,
+    %   still comfortably above the 6pt floor, to buy back the width the
+    %   wider gap took from the info column.)
+    % -------------------------------------------------------------------
+    \def\bodytop{\cardheight-\barheight-2}          % just below the header bar
+    % \pgfmathsetmacro (rather than \def) actually EVALUATES this to a
+    % plain number immediately. That matters here: \def'd macros just
+    % substitute their expansion text, so a bare \def would hand TikZ's
+    % "at (4,\contentcentery)" a y-component that itself starts with "(" --
+    % pgf's coordinate-list parser sees that nested ")" as closing the
+    % whole coordinate early and silently spills the rest as stray node
+    % text. Pre-computing the number sidesteps that parser entirely.
+    \pgfmathsetmacro{\contentcentery}{(\bodytop+\safemargin)/2}
+    % midpoint of the space between the header bar and the bottom safe
+    % margin -- both the dog and the info column are vertically centered
+    % (anchor=west) on this same y.
 
-    \node[anchor=north west, inner sep=0] at (0.2in,1.75in) {
-        \begin{minipage}{1.7in}
-            \fontsize{15}{13}\selectfont\bfseries Lluc Santamaria\\[0.03in]
-            \fontsize{6}{11}\selectfont\color{gray} CS Researcher \& Engineer
+    % ASCII logo -- reproduced EXACTLY as specified, char for char:
+    %     o'')}____//
+    %      `_/      )
+    %      (_(_/-(_/
+    % \obeyspaces stops LaTeX from collapsing the internal runs of spaces
+    % that keep the three lines aligned; \_ and \} escape the two TeX-active
+    % characters in the art. \textasciigrave and \textquotesingle guarantee
+    % literal grave-accent/apostrophe glyphs -- without them, JetBrains
+    % Mono's ligature table silently fuses two raw "'" characters into one
+    % curly right-double-quote glyph, which would quietly wreck this art
+    % exactly the way the task warned about. \raggedright keeps LaTeX from
+    % trying to justify-stretch these short, rigid lines. anchor=west here
+    % (rather than north west) centers the block vertically on
+    % \contentcentery, same as the info column below.
+    \node[anchor=west, inner sep=0] at (4,\contentcentery) {
+        \begin{minipage}{17mm}
+            \raggedright
+            {\obeyspaces\fontsize{7}{8.4}\selectfont\bfseries\color{accent}%
+            o\textquotesingle\textquotesingle)\}\_\_\_\_//\\
+             \textasciigrave\_/      )\\
+             (\_(\_/-(\_/%
+            }
         \end{minipage}
     };
 
-    \node[anchor=south west, inner sep=0] at (0.2in,0.2in) {
-        \begin{minipage}{1.7in}
-            \fontsize{7}{9}\selectfont
-            \href{tel:+16575732353}{\color{bluecard}\faPhone\color{black}~ +1 (657) 573-2353}\\[0.05in]
-            \href{mailto:lluc.santa@gmail.com}{\color{bluecard}\faEnvelope\color{black}~ lluc.santa@gmail.com}\\[0.05in]
-            \href{https://linktr.ee/lluc_santamaria}{\color{bluecard}\faGlobe\color{black}~ linktr.ee/lluc\_santamaria}\\[0.05in]
-            \href{https://linkedin.com/in/lluc-santamaria}{\color{bluecard}\faLinkedin\color{black}~ linkedin.com/in/lluc-santamaria}
+    % fastfetch info block: bold "lluc@card" header (neofetch-style -- the
+    % user/host segments are accent-colored, the "@" deliberately isn't),
+    % then a hyphen rule (plain "-" characters, like neofetch's own
+    % separator, instead of a drawn line), then nine key/value rows. Header
+    % and rule are set at the same 6.3pt size as the rows and pulled in
+    % tight (0.3mm gaps) so all three read as one compact block rather than
+    % three separately-spaced pieces; the hyphens are body-color (dark),
+    % not the muted gray used for other secondary lines. \noligfont on the
+    % hyphen row turns off JetBrains Mono's programming ligatures for that
+    % line only -- otherwise the font fuses runs of "-" into en-/em-dash
+    % glyphs, same issue as the "->" fix on the back.
+    % Keys are bold+accent; values are body color (links stay clickable via
+    % \href but keep the body color rather than hyperref's default blue).
+    \node[anchor=west, inner sep=0] at (25,\contentcentery) {
+        \begin{minipage}{56mm}
+            \fontsize{6.3}{7.4}\selectfont\bfseries\color{accent}lluc\color{bodycolor}@\color{accent}card\\[0.3mm]
+            {\noligfont\fontsize{6.3}{7.4}\selectfont\color{bodycolor}%
+            ----------------------------------------}\\[0.3mm]
+            \fontsize{6.3}{9.2}\selectfont\color{bodycolor}
+            \makebox[11mm][l]{\bfseries\color{accent}Name}Lluc Santamaria Riba\\
+            \makebox[11mm][l]{\bfseries\color{accent}Role}Voice AI Engineer\\
+            \makebox[11mm][l]{\bfseries\color{accent}Company}Prosper AI\\
+            \makebox[11mm][l]{\bfseries\color{accent}Shell}Python \textperiodcentered\ TypeScript\\
+            \makebox[11mm][l]{\bfseries\color{accent}Web}\href{https://lluc.sh}{\color{bodycolor}lluc.sh}\\
+            \makebox[11mm][l]{\bfseries\color{accent}Mail}\href{mailto:lluc@lluc.sh}{\color{bodycolor}lluc@lluc.sh}\\
+            \makebox[11mm][l]{\bfseries\color{accent}Git}\href{https://github.com/Lluc24}{\color{bodycolor}github.com/Lluc24}\\
+            \makebox[11mm][l]{\bfseries\color{accent}In}\href{https://linkedin.com/in/lluc-santamaria}{\color{bodycolor}linkedin.com/in/lluc-santamaria}\\
+            \makebox[11mm][l]{\bfseries\color{accent}Tel}\href{tel:+34639412589}{\color{bodycolor}+34 639 41 25 89}
         \end{minipage}
-    };
-
-    \node[anchor=center] at (2.85in,1in) {
-        \includegraphics[width=0.8in]{qr.png}
     };
     \end{scope}
+
+    % crop marks drawn last, on top of the background, in the outer
+    % (full-canvas) coordinate frame — otherwise the background fill above
+    % would paint straight over them.
+    \drawcropmarks
 \end{tikzpicture}
 
 \newpage
 
-\begin{tikzpicture}
-    \def\cardwidth{3.5in}
-    \def\cardheight{2in}
-    \def\bleed{0.125in}
-    \def\fullwidth{3.75in}
-    \def\fullheight{2.25in}
+% =============================================================================
+% BACK — tagline as the focal point, QR code (the only one on the card) next
+% to it in a white "quiet zone" panel so it stays scannable against the card
+% background.
+% =============================================================================
+\begin{tikzpicture}[x=1mm,y=1mm]
+    \def\cardwidth{85}
+    \def\cardheight{55}
+    \def\bleed{3}
+    \def\fullwidth{91}
+    \def\fullheight{61}
+    \def\safemargin{4}
+    \def\barheight{8}
 
     \useasboundingbox (0,0) rectangle (\fullwidth,\fullheight);
+
     \begin{scope}[shift={(\bleed,\bleed)}]
-    \fill[white] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
+    \fill[cardbg] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
 
-    \fill[bluecard] (2.9in,0.4in) -- (\cardwidth+\bleed,-\bleed) -- (\cardwidth+\bleed,\cardheight+\bleed) -- cycle;
+    \headerbar{lluc@card: \textasciitilde/back}
 
-    \fill[bluecard] (-\bleed,-\bleed) -- (0.6in,-\bleed) -- (-\bleed,0.7in) -- cycle;
-
-    \node[anchor=center] at (1.75in,1.25in) {
-        \includegraphics[width=1in]{qr.png}
+    % left column: tagline with a solid-block "cursor" right after it
+    \node[anchor=west, inner sep=0] at (\safemargin,23) {
+        \begin{minipage}{46mm}
+            \fontsize{6.5}{8}\selectfont\color{mutedtext} \$ ./deploy.sh\\[1.5mm]
+            \fontsize{12.5}{15}\selectfont\bfseries\color{accent}
+            From theory\\ to production\raisebox{-0.2mm}{\rule{1.8mm}{3.4mm}}\\[2.5mm]
+            \fontsize{6.5}{8}\selectfont\color{mutedtext} \$ \textunderscore
+        \end{minipage}
     };
 
-    \node[anchor=center] at (1.75in,0.4in) {
-        \fontsize{15}{22}\selectfont\bfseries From theory to production
-    };
+    % right column: QR on a white quiet-zone backing (only QR on the card).
+    % qr.png currently encodes https://lluc.sh (regenerated directly with
+    % the `qrcode` Python package -- plain finder patterns, no logo mark).
+    % If it's ever swapped again, the \includegraphics call below needs no
+    % changes, only the image file.
+    \fill[white, rounded corners=1mm] (67-15,23-15) rectangle (67+15,23+15);
+    \node[anchor=center] at (67,23) {\includegraphics[width=26mm]{qr.png}};
+    % \noligfont turns off JetBrains Mono's programming-ligature table for
+    % this one fragment -- otherwise the font itself (not TeX) silently
+    % redraws the literal "->" as a single arrow glyph, which is exactly
+    % the fallback-look this rewrite was asked to remove.
+    \node[anchor=north] at (67,23-15-1.5) {{\noligfont\fontsize{6}{7}\selectfont\color{mutedtext} scan -> lluc.sh}};
     \end{scope}
+
+    \drawcropmarks
 \end{tikzpicture}
 
 \end{document}
