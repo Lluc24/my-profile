@@ -13,3 +13,6 @@ Co-Authored-By: Lluc Santamaria Riba <lluc.santa@gmail.com>
   from it.
 - Recompile and commit the PDF whenever you change its `.tex` (CV: two
   `pdflatex` passes, must stay one page).
+- Every CV bullet must fit on one line in the PDF: ~105 characters always
+  fits, ~120 for lowercase-heavy text, ~107 if it is caps-heavy. Check the
+  compiled PDF, not the source.
