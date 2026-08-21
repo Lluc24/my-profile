@@ -28,20 +28,24 @@ experience:
       office, I am part of the core tech team, on the deployment and
       delivery side of the platform: the layer where voice agents are
       configured, shipped to customers and kept working on live call
-      traffic. My focus is the experience those calls actually deliver,
-      measured end to end — how accurately agents capture and act on the
+      traffic. My job is to raise the numbers that decide whether those
+      calls are any good — how accurately agents capture and act on the
       information a call is placed for, and what share of calls reach a
       successful outcome instead of failing, stalling or handing back to
-      a human. I work on moving those quality metrics so that everyone
-      on either end of a Prosper call — patients, providers, clinics and
-      payors — gets a call that does what it was meant to do. The work
+      a human. That is engineering work, not reporting: I dig into the
+      calls that fail or degrade, find the cause in the agent and in the
+      stack around it, and ship the change that moves the metric, on
+      live production traffic. Measuring call quality is the easy half;
+      moving it is the hard one, and it is what everyone on either end
+      of a Prosper call depends on — patients, providers, clinics and
+      payors all need a call that does what it was meant to do. The work
       sits close to the low-latency speech and large language model
       orchestration stack, covering speech orchestration, turn-taking
       and real-time reasoning.
     key_points:
-      - Deploy and deliver voice agents that run on live production call traffic
-      - Improve agent accuracy and the share of calls ending in a successful outcome
-      - Move end-to-end call quality metrics for patients, providers, clinics and payors
+      - Raise agent accuracy and the share of calls ending in a successful outcome
+      - Root-cause failing and degraded calls, then ship the fix to live traffic
+      - Move call quality metrics for patients, providers, clinics and payors
 
   - title: Balsells Research Fellow
     organization: University of California, Irvine
