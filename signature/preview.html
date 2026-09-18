@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signature Options</title>
+<style>
+  :root {
+    --bg: #f6f7f8;
+    --surface: #ffffff;
+    --ink: #1f2328;
+    --muted: #656d76;
+    --line: #d8dbdf;
+    --accent: #1a7f37;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 48px 16px 72px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.2px; }
+  .lede { color: var(--muted); margin: 0 0 40px; font-size: 15px; max-width: 60ch; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+  .card h2 { font-size: 16px; margin: 0 0 6px; }
+  .card header p { margin: 0 0 10px; color: var(--muted); font-size: 14px; max-width: 62ch; }
+  code, .file {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+  }
+  .file { color: var(--accent); }
+  .stage {
+    margin-top: 18px;
+    padding: 22px;
+    background: #fff;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  .signoff {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  footer {
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    max-width: 62ch;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16191d;
+      --surface: #1e2227;
+      --ink: #e6e9ed;
+      --muted: #9aa3ad;
+      --line: #333a42;
+      --accent: #4ac26b;
+    }
+    /* the signatures themselves are light-mode email HTML — keep the
+       stage white so they preview the way a recipient would see them */
+    :root:not([data-theme="light"]) .stage { background: #ffffff; }
+    :root:not([data-theme="light"]) .signoff { color: #656d76; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Email signature options</h1>
+    <p class="lede">Four takes on the same information, all image-free and table-based so they survive Gmail, Outlook and Apple Mail. Colours are lifted from your business card: <code>#1A7F37</code> accent, <code>#1F2328</code> body, <code>#656D76</code> muted.</p>
+    <section class="card">
+      <header>
+        <h2>1 — Minimal</h2>
+        <p>Plain text hierarchy and a single hairline. Renders identically everywhere, including Outlook desktop and plain-text-leaning clients. Safest default.</p>
+        <code class="file">signature/signature-1-minimal.html</code>
+      </header>
+      <div class="stage">
+        <div class="quoted">
+          <p class="signoff">Best,</p>
+<!-- ============================================================
+     Signature 1 — Minimal
+     Plain text hierarchy, one hairline rule, no images.
+     The safest option: renders identically everywhere, including
+     Outlook desktop and plain-text-leaning clients.
+     ============================================================ -->
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+  <tr>
+    <td style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;font-weight:700;color:#1F2328;padding:0 0 2px 0;">
+      Lluc Santamaria Riba
+    </td>
+  </tr>
+  <tr>
+    <td style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:18px;color:#656D76;padding:0 0 10px 0;">
+      Voice AI Engineer &nbsp;&middot;&nbsp; Prosper AI
+    </td>
+  </tr>
+  <tr>
+    <td style="border-top:1px solid #D0D0D0;font-size:0;line-height:0;padding:0 0 10px 0;">&nbsp;</td>
+  </tr>
+  <tr>
+    <td style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:20px;color:#656D76;">
+      <a href="mailto:lluc@lluc.sh" style="color:#1A7F37;text-decoration:none;">lluc@lluc.sh</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://lluc.sh" style="color:#1A7F37;text-decoration:none;">lluc.sh</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://linkedin.com/in/lluc-santamaria" style="color:#1A7F37;text-decoration:none;">LinkedIn</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://github.com/Lluc24" style="color:#1A7F37;text-decoration:none;">GitHub</a>
+      <!-- Phone (currently hidden, matching the CV and business card):
+      &nbsp;&middot;&nbsp;
+      <a href="tel:+34639412589" style="color:#1A7F37;text-decoration:none;">+34 639 41 25 89</a>
+      -->
+    </td>
+  </tr>
+</table>
+
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <header>
+        <h2>2 — Accent bar</h2>
+        <p>A green rule down the left edge, drawn as a cell border so it survives image blocking. Adds brand colour without adding weight.</p>
+        <code class="file">signature/signature-2-accent-bar.html</code>
+      </header>
+      <div class="stage">
+        <div class="quoted">
+          <p class="signoff">Best,</p>
+<!-- ============================================================
+     Signature 2 — Accent bar
+     A 3px green rule down the left edge carries the brand colour.
+     The rule is a border-left on the content cell rather than a
+     spacer GIF, so it still shows when a client blocks images —
+     which most do by default on a first email from a new sender.
+     ============================================================ -->
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+  <tr>
+    <td style="border-left:3px solid #1A7F37;padding:2px 0 2px 14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+      <div style="font-size:16px;line-height:21px;font-weight:700;color:#1F2328;padding-bottom:3px;">
+        Lluc Santamaria Riba
+      </div>
+      <div style="font-size:13px;line-height:18px;font-weight:600;color:#1A7F37;">
+        Voice AI Engineer
+      </div>
+      <div style="font-size:13px;line-height:18px;color:#656D76;padding-bottom:10px;">
+        Prosper AI &nbsp;&middot;&nbsp; Barcelona
+      </div>
+      <div style="font-size:13px;line-height:20px;color:#656D76;">
+        <a href="mailto:lluc@lluc.sh" style="color:#1F2328;text-decoration:none;">lluc@lluc.sh</a><br>
+        <a href="https://lluc.sh" style="color:#1F2328;text-decoration:none;">lluc.sh</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://linkedin.com/in/lluc-santamaria" style="color:#1F2328;text-decoration:none;">linkedin.com/in/lluc-santamaria</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://github.com/Lluc24" style="color:#1F2328;text-decoration:none;">github.com/Lluc24</a>
+        <!-- Phone (currently hidden, matching the CV and business card):
+        <br><a href="tel:+34639412589" style="color:#1F2328;text-decoration:none;">+34 639 41 25 89</a>
+        -->
+      </div>
+    </td>
+  </tr>
+</table>
+
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <header>
+        <h2>3 — Terminal</h2>
+        <p>Mirrors the front of your business card: <code>lluc@mail</code> prompt, hyphen rule, accent key/value rows. Distinctive; best for engineering correspondence.</p>
+        <code class="file">signature/signature-3-terminal.html</code>
+      </header>
+      <div class="stage">
+        <div class="quoted">
+          <p class="signoff">Best,</p>
+<!-- ============================================================
+     Signature 3 — Terminal / fastfetch
+     Mirrors the front of the business card: a "lluc@mail" prompt,
+     a hyphen rule, and accent-coloured key/value rows. Monospace
+     stack only — no web fonts, so nothing to load or fall back from.
+     Distinctive; best for engineering-side correspondence.
+     ============================================================ -->
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;">
+  <tr>
+    <td colspan="2" style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:13px;line-height:18px;font-weight:700;color:#1A7F37;">
+      lluc<span style="color:#1F2328;">@</span>mail
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:13px;line-height:14px;color:#1F2328;padding-bottom:4px;letter-spacing:0.5px;">
+      ----------------------------------
+    </td>
+  </tr>
+  <tr>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;font-weight:700;color:#1A7F37;padding-right:14px;white-space:nowrap;vertical-align:top;">Name</td>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;color:#1F2328;">Lluc Santamaria Riba</td>
+  </tr>
+  <tr>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;font-weight:700;color:#1A7F37;padding-right:14px;white-space:nowrap;vertical-align:top;">Role</td>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;color:#1F2328;">Voice AI Engineer</td>
+  </tr>
+  <tr>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;font-weight:700;color:#1A7F37;padding-right:14px;white-space:nowrap;vertical-align:top;">Company</td>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;color:#1F2328;">Prosper AI</td>
+  </tr>
+  <tr>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;font-weight:700;color:#1A7F37;padding-right:14px;white-space:nowrap;vertical-align:top;">Web</td>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;color:#1F2328;"><a href="https://lluc.sh" style="color:#1F2328;text-decoration:none;">lluc.sh</a></td>
+  </tr>
+  <tr>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;font-weight:700;color:#1A7F37;padding-right:14px;white-space:nowrap;vertical-align:top;">Git</td>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;color:#1F2328;"><a href="https://github.com/Lluc24" style="color:#1F2328;text-decoration:none;">github.com/Lluc24</a></td>
+  </tr>
+  <tr>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;font-weight:700;color:#1A7F37;padding-right:14px;white-space:nowrap;vertical-align:top;">In</td>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;color:#1F2328;"><a href="https://linkedin.com/in/lluc-santamaria" style="color:#1F2328;text-decoration:none;">linkedin.com/in/lluc-santamaria</a></td>
+  </tr>
+  <!-- Phone (currently hidden, matching the CV and business card):
+  <tr>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;font-weight:700;color:#1A7F37;padding-right:14px;white-space:nowrap;vertical-align:top;">Tel</td>
+    <td style="font-family:'JetBrains Mono',Consolas,'SF Mono',Menlo,Monaco,'Courier New',monospace;font-size:12px;line-height:19px;color:#1F2328;"><a href="tel:+34639412589" style="color:#1F2328;text-decoration:none;">+34 639 41 25 89</a></td>
+  </tr>
+  -->
+</table>
+
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <header>
+        <h2>4 — Monogram</h2>
+        <p>An “LS” tile built from a table cell rather than an image, then a hairline divider. The most designed of the four, still image-free.</p>
+        <code class="file">signature/signature-4-monogram.html</code>
+      </header>
+      <div class="stage">
+        <div class="quoted">
+          <p class="signoff">Best,</p>
+<!-- ============================================================
+     Signature 4 — Monogram + divider
+     A green "LS" tile built from a table cell, not an image, then
+     a vertical hairline, then the details. Reads as the most
+     "designed" of the four while still being image-free.
+     ============================================================ -->
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+  <tr>
+    <!-- monogram tile: 52x52, centred initials, no image -->
+    <td width="52" height="52" align="center" valign="middle"
+        style="width:52px;height:52px;background-color:#1A7F37;border-radius:6px;
+               font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+               font-size:20px;line-height:52px;font-weight:700;color:#FFFFFF;letter-spacing:1px;text-align:center;">
+      LS
+    </td>
+    <td width="16" style="width:16px;font-size:0;line-height:0;">&nbsp;</td>
+    <!-- hairline divider -->
+    <td width="1" style="width:1px;background-color:#D0D0D0;font-size:0;line-height:0;">&nbsp;</td>
+    <td width="16" style="width:16px;font-size:0;line-height:0;">&nbsp;</td>
+    <td valign="middle" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+      <div style="font-size:15px;line-height:20px;font-weight:700;color:#1F2328;">
+        Lluc Santamaria Riba
+      </div>
+      <div style="font-size:13px;line-height:18px;color:#656D76;padding-bottom:5px;">
+        Voice AI Engineer at
+        <a href="https://prosperai.com" style="color:#1A7F37;text-decoration:none;font-weight:600;">Prosper AI</a>
+      </div>
+      <div style="font-size:12px;line-height:18px;color:#656D76;">
+        <a href="mailto:lluc@lluc.sh" style="color:#656D76;text-decoration:none;">lluc@lluc.sh</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://lluc.sh" style="color:#656D76;text-decoration:none;">lluc.sh</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://linkedin.com/in/lluc-santamaria" style="color:#656D76;text-decoration:none;">LinkedIn</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://github.com/Lluc24" style="color:#656D76;text-decoration:none;">GitHub</a>
+        <!-- Phone (currently hidden, matching the CV and business card):
+        &nbsp;&middot;&nbsp;
+        <a href="tel:+34639412589" style="color:#656D76;text-decoration:none;">+34 639 41 25 89</a>
+        -->
+      </div>
+    </td>
+  </tr>
+</table>
+
+        </div>
+      </div>
+    </section>
+    <footer>Each preview sits on a white stage because the markup is light-mode email HTML — that is what a recipient sees. Swap <code>lluc@lluc.sh</code> for <code>lluc.santa@gmail.com</code> if you would rather route replies there, and uncomment the phone block in any file to bring the number back.</footer>
+  </div>
+</body>
+</html>
