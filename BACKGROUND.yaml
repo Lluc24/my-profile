@@ -19,28 +19,52 @@ experience:
     location: Barcelona, Catalonia, Spain
     location_type: Hybrid
     description: >
-      AI Engineer at Prosper AI, a Y Combinator startup backed by a 30
-      million dollar Series A led by Andreessen Horowitz, building
-      real-time voice AI agents for healthcare that place thousands of
-      calls every day to patients and payors, automating workflows such
-      as appointment scheduling, insurance benefits verification, prior
-      authorizations and billing. Working from the Barcelona engineering
-      office, I am part of the core tech team, on the deployment and
-      delivery side of the platform: where voice agents are configured,
-      shipped to customers and kept working on live call traffic. I
-      raise the metrics that decide whether those calls work — agent
-      accuracy, and the share of calls that reach a successful outcome
-      instead of failing, stalling or handing back to a human. I
-      root-cause the calls that fail or degrade and ship the fix on live
-      production traffic, so that patients, providers, clinics and
-      payors get calls that do what they were meant to do. The work sits
-      close to the low-latency speech and large language model
-      orchestration stack, covering speech orchestration, turn-taking
-      and real-time reasoning.
+      I am an Associate AI Engineer at Prosper AI, a Y Combinator startup
+      backed by a 30 million dollar Series A led by Andreessen Horowitz.
+      Prosper builds real-time voice AI agents that place thousands of
+      healthcare calls a day for scheduling, insurance verification, prior
+      authorizations and billing. From the Barcelona office I own the
+      voicebot's real-time pipeline, built in Python on Pipecat: telephony,
+      speech-to-text, the language model and text-to-speech working as one
+      low-latency conversation. In my first nine weeks I merged 259 pull
+      requests and closed 120 tickets.
+
+      I cut the silence callers hear before the agent's first word by 90%
+      at the median and eliminated waits over five seconds, which had hit
+      1.8% of calls. The bot was re-reading its whole configuration from
+      the database on every call over more than a hundred fresh
+      connections; I had the server send it with the call assignment and
+      ran the remaining lookups in parallel.
+
+      I made every agent reply 20% faster by moving OpenAI inference from
+      the Chat Completions API, which resends the whole conversation each
+      turn, to the Responses API over a persistent WebSocket that sends
+      only the newest turn. Time to the agent's first word fell 32% on
+      inbound and 38% on outbound calls, callers asking "are you there?"
+      fell 22%, and call outcomes held, with zero lost conversations over
+      a four-day staged rollout.
+
+      I upgraded the voicebot from Pipecat 0.0.100 to 1.13 across six
+      releases, deleting thousands of lines of custom code the library now
+      covers. I made the language model layer multi-vendor: a failing or
+      rate-limited OpenAI turn is answered through Amazon Bedrock
+      automatically, with alerts before any provider limit is hit. When
+      OpenAI rate-limited live calls one morning, I moved the busiest
+      agents to Bedrock mid-incident.
+
+      I shipped ElevenLabs v4 voices with a controlled set of delivery
+      tags and the prompt that makes every patient agent sound like a
+      real front desk. Within a week of launch, v4 voices carried up to
+      18% of a day's calls, tracked on an adoption dashboard I built. I
+      also added phonetic (IPA) pronunciations for doctor, street and
+      drug names and presented each release to the company in videos I
+      produced end to end.
     key_points:
-      - Raise agent accuracy and the share of calls ending in a successful outcome
-      - Root-cause failing and degraded calls, then ship the fix to live traffic
-      - Move call quality metrics for patients, providers, clinics and payors
+      - Cut the silence before the agent's first word by 90% at the median and eliminated waits over 5 s
+      - Made every agent reply 20% faster by moving OpenAI inference to the Responses API over WebSocket
+      - Upgraded the voicebot from Pipecat 0.0.100 to 1.13 in six releases, deleting thousands of custom lines
+      - Added automatic Bedrock failover and provider-limit alerts, so one vendor outage cannot silence calls
+      - Shipped ElevenLabs v4 voices with controlled delivery tags; v4 carried 18% of daily calls within a week
 
   - title: Balsells Research Fellow
     organization: University of California, Irvine
