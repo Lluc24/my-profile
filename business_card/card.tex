@@ -1,39 +1,31 @@
-% Business card in the GitToken style: night background, aurora glows,
-% Inter type, glass panel, iridescent rim. Compile with: lualatex card.tex
+% Minimal business card in the GitToken style: night background, Inter type,
+% one iridescent accent. Compile with: lualatex card.tex
 % TikZ runs at x=1mm,y=1mm, so every bare coordinate is a millimetre.
 \documentclass[tikz,border=0mm]{standalone}
 \usepackage{graphicx}
 \usepackage{fontspec}
-\usetikzlibrary{fadings}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 
 \setmainfont{Inter}[UprightFont=*-Regular, BoldFont=*-ExtraBold]
 \newfontfamily\semiboldfont{Inter SemiBold}
-\newfontfamily\mediumfont{Inter Medium}
 % Programming ligatures off so URLs print character for character.
 \setmonofont{JetBrains Mono}[RawFeature={-calt;-liga}]
 
-% Palette from GitToken: frontend/src/index.css, the dark aurora in App.tsx
-% and the legendary rarity in backend templates/palette.jinja.
+% Palette from GitToken's backend templates/palette.jinja: the dark card
+% background and the iridescent rim of legendary profile cards.
 \definecolor{night}{HTML}{0B0E1A}
 \definecolor{ink}{HTML}{FFFFFF}
-\definecolor{glowcyan}{HTML}{06B6D4}
-\definecolor{glowviolet}{HTML}{7C3AED}
-\definecolor{glowfuchsia}{HTML}{D946EF}
-\definecolor{accent}{HTML}{67E8F9}
-\definecolor{lightviolet}{HTML}{A78BFA}
+\colorlet{secondaryink}{ink!60!night}
+\definecolor{lightcyan}{HTML}{67E8F9}
 \definecolor{lightfuchsia}{HTML}{E879F9}
 \definecolor{lightamber}{HTML}{FCD34D}
 \definecolor{lightgreen}{HTML}{86EFAC}
-\colorlet{secondaryink}{ink!60!night}
 
-\tikzfading[name=glow, inner color=transparent!0, outer color=transparent!100]
+% PGF maps a shaded path onto the middle 50bp of a 100bp shading.
 \pgfdeclarehorizontalshading{iridescent}{100bp}{%
-  color(0bp)=(accent); color(25bp)=(lightfuchsia); color(50bp)=(lightamber);
-  color(75bp)=(lightgreen); color(100bp)=(accent)}
-\pgfdeclarehorizontalshading{brandtile}{100bp}{%
-  color(0bp)=(accent); color(50bp)=(lightviolet); color(100bp)=(lightfuchsia)}
+  color(0bp)=(lightcyan); color(25bp)=(lightcyan); color(42bp)=(lightfuchsia);
+  color(58bp)=(lightamber); color(75bp)=(lightgreen); color(100bp)=(lightgreen)}
 
 \def\cardwidth{85}
 \def\cardheight{55}
@@ -44,76 +36,52 @@
 % The PDF page is the bleed box; the trim box tells the print shop where to cut.
 \pdfvariable pageattr{/TrimBox [8.504 8.504 249.447 164.409] /BleedBox [0 0 257.953 172.913]}
 
-% #1 and #2: centres of the cyan and fuchsia glows; violet sits on the right edge.
-\newcommand{\nightbackground}[2]{%
-  \fill[night] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
-  \begin{scope}
-    \clip (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
-    \fill[glowcyan, opacity=0.5, path fading=glow] #1 circle (38);
-    \fill[glowviolet, opacity=0.55, path fading=glow] (\cardwidth+4,30) circle (34);
-    \fill[glowfuchsia, opacity=0.45, path fading=glow] #2 circle (30);
-  \end{scope}
-}
+\def\leftmargin{8}
 
-\newcommand{\spacedcaps}[2]{\addfontfeature{LetterSpace=#1}\MakeUppercase{#2}}
+\newcommand{\nightbackground}{%
+  \fill[night] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);}
 
-% #1: baseline y in mm.
-\newcommand{\contactrow}[4]{%
-  \node[anchor=base west, inner sep=0] at (9,#1)
-    {\mediumfont\fontsize{6.5}{7}\selectfont\color{secondaryink}#2};
-  \node[anchor=base east, inner sep=0] at (76,#1)
-    {\href{#3}{\ttfamily\fontsize{6.5}{7}\selectfont\color{ink}#4}};}
+\newcommand{\linktext}[2]{\href{#1}{\ttfamily\fontsize{6.5}{7}\selectfont\color{ink}#2}}
+
+% #1: left end of the line, in mm.
+\newcommand{\accentline}[1]{\shade[shading=iridescent] #1 rectangle ++(12,0.5);}
+
+% #1: baseline y in mm; #2: link target; #3: printed text.
+\newcommand{\contactline}[3]{%
+  \node[anchor=base west, inner sep=0] at (\leftmargin,#1) {\linktext{#2}{#3}};}
 
 \begin{document}
 
 \begin{tikzpicture}[x=1mm,y=1mm]
   \useasboundingbox (0,0) rectangle (\fullwidth,\fullheight);
   \begin{scope}[shift={(\bleed,\bleed)}]
-    \nightbackground{(4,58)}{(30,-12)}
+    \nightbackground
 
-    \shade[shading=brandtile, shading angle=-45, rounded corners=1.8mm]
-      (6,40) rectangle (14,48);
-    \node[anchor=center, inner sep=0] at (10,44)
-      {\fontsize{12}{12}\selectfont\bfseries\color{night}L};
+    \node[anchor=base west, inner sep=0] at (\leftmargin,41)
+      {\fontsize{13}{14}\selectfont\bfseries\addfontfeature{LetterSpace=-2}\color{ink}Lluc Santamaria Riba};
+    \node[anchor=base west, inner sep=0] at (\leftmargin,35.5)
+      {\semiboldfont\fontsize{6}{7}\selectfont\addfontfeature{LetterSpace=30}\color{secondaryink}\MakeUppercase{Voice AI Engineer · Prosper AI}};
+    \accentline{(\leftmargin,30.5)}
 
-    \node[anchor=base west, inner sep=0] at (6,31.5)
-      {\fontsize{15}{16}\selectfont\bfseries\addfontfeature{LetterSpace=-2}\color{ink}Lluc Santamaria Riba};
-    \node[anchor=base west, inner sep=0] at (6,26.5)
-      {\semiboldfont\fontsize{6}{7}\selectfont\color{accent}\spacedcaps{30}{Voice AI Engineer · Prosper AI}};
-
-    \fill[ink, opacity=0.07, rounded corners=3mm] (5,4.5) rectangle (80,22.5);
-    \draw[ink, opacity=0.2, line width=0.15mm, rounded corners=3mm] (5,4.5) rectangle (80,22.5);
-    \contactrow{18.4}{Web}{https://lluc.sh}{lluc.sh}
-    \contactrow{14.6}{Mail}{mailto:lluc@lluc.sh}{lluc@lluc.sh}
-    \contactrow{10.8}{GitHub}{https://github.com/Lluc24}{github.com/Lluc24}
-    \contactrow{7}{LinkedIn}{https://linkedin.com/in/lluc-santamaria}{linkedin.com/in/lluc-santamaria}
+    \contactline{19}{https://lluc.sh}{lluc.sh}
+    \contactline{15}{mailto:lluc@lluc.sh}{lluc@lluc.sh}
+    \contactline{11}{https://github.com/Lluc24}{github.com/Lluc24}
+    \contactline{7}{https://linkedin.com/in/lluc-santamaria}{linkedin.com/in/lluc-santamaria}
   \end{scope}
 \end{tikzpicture}
 
 \begin{tikzpicture}[x=1mm,y=1mm]
   \useasboundingbox (0,0) rectangle (\fullwidth,\fullheight);
   \begin{scope}[shift={(\bleed,\bleed)}]
-    \nightbackground{(-4,-6)}{(60,62)}
+    \nightbackground
 
-    \node[anchor=base west, inner sep=0] at (6,40)
-      {\semiboldfont\fontsize{6}{7}\selectfont\color{secondaryink}\spacedcaps{30}{Lluc Santamaria}};
-    \node[anchor=north west, inner sep=0] at (6,36) {%
-      \begin{minipage}{44mm}
-        \fontsize{15}{16}\selectfont\bfseries\addfontfeature{LetterSpace=-2}%
-        {\color{ink}From theory}\\
-        {\color{ink!55!night}to production}
-      \end{minipage}};
-    \node[anchor=base west, inner sep=0] at (6,9)
-      {\href{https://lluc.sh}{\ttfamily\fontsize{6.5}{7}\selectfont\color{accent}lluc.sh}};
-
-    \shade[shading=iridescent, shading angle=-45, rounded corners=3.4mm]
-      (50,10) rectangle (80,44);
-    \fill[night, rounded corners=3mm] (50.5,10.5) rectangle (79.5,43.5);
     % The QR quiet zone must stay white whatever ink becomes.
-    \fill[white, rounded corners=2mm] (52.5,17) rectangle (77.5,42);
-    \node[anchor=center, inner sep=0] at (65,29.5) {\href{https://lluc.sh}{\includegraphics[width=21mm]{qr.png}}};
-    \node[anchor=center, inner sep=0] at (65,13.6)
-      {\semiboldfont\fontsize{6}{7}\selectfont\color{secondaryink}\spacedcaps{35}{Scan}};
+    \fill[white, rounded corners=1.5mm] (30,18) rectangle (55,43);
+    \node[anchor=center, inner sep=0] at (42.5,30.5)
+      {\href{https://lluc.sh}{\includegraphics[width=21mm]{qr.png}}};
+    \accentline{(36.5,12.5)}
+    \node[anchor=base, inner sep=0] at (42.5,7)
+      {\linktext{https://lluc.sh}{lluc.sh}};
   \end{scope}
 \end{tikzpicture}
 
