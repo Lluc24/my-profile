@@ -20,7 +20,7 @@ You can view the latest compiled versions directly here:
 
 ## Build Instructions
 
-To compile these documents from source, a standard TeX distribution (such as TeX Live or MiKTeX) is required. Please note that the LaTeX source files require two consecutive compilation passes to correctly resolve page numbering and cross-references.
+To compile these documents from source, a standard TeX distribution (such as TeX Live or MiKTeX) is required. The CV needs two consecutive `pdflatex` passes to resolve cross-references. The business card needs one `lualatex` pass and the static Inter and JetBrains Mono fonts installed system-wide.
 
 **Compiling the CV:**
 
@@ -34,7 +34,7 @@ pdflatex Lluc_Santamaria_CV.tex
 
 ```bash
 cd business_card
-pdflatex card.tex
+lualatex card.tex
 ```
 
 ## Usage and License
