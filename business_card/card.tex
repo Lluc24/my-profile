@@ -8,7 +8,6 @@
 \hypersetup{hidelinks}
 
 \setmainfont{Inter}[UprightFont=*-Regular, BoldFont=*-ExtraBold]
-\newfontfamily\semiboldfont{Inter SemiBold}
 % Programming ligatures off so URLs print character for character.
 \setmonofont{JetBrains Mono}[RawFeature={-calt;-liga}]
 
@@ -40,7 +39,8 @@
 \newcommand{\nightbackground}{%
   \fill[night] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);}
 
-\newcommand{\linktext}[2]{\href{#1}{\ttfamily\fontsize{6.5}{7}\selectfont\color{ink}#2}}
+\newcommand{\monotext}{\ttfamily\fontsize{6.5}{7}\selectfont}
+\newcommand{\linktext}[2]{\href{#1}{\monotext\color{ink}#2}}
 
 % #1: left end of the line, in mm.
 \newcommand{\accentline}[1]{\shade[shading=iridescent] #1 rectangle ++(12,0.5);}
@@ -59,7 +59,9 @@
     \node[anchor=base west, inner sep=0] at (\textleft,41)
       {\fontsize{13}{14}\selectfont\bfseries\addfontfeature{LetterSpace=-2}\color{ink}Lluc Santamaria Riba};
     \node[anchor=base west, inner sep=0] at (\textleft,35.5)
-      {\semiboldfont\fontsize{6}{7}\selectfont\addfontfeature{LetterSpace=30}\color{secondaryink}\MakeUppercase{Voice AI Engineer · Prosper AI}};
+      {\monotext\color{secondaryink}Voice AI Engineer%
+        \hspace{2.2mm}\rule[-0.6mm]{0.15mm}{2.8mm}\hspace{2.2mm}%
+        {\color{ink}Prosper AI}};
     \accentline{(\textleft,30.5)}
 
     \contactline{19}{https://lluc.sh}{lluc.sh}
