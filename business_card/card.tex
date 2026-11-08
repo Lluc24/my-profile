@@ -1,5 +1,5 @@
-% Minimal business card in the GitToken style: night background, Inter type,
-% one iridescent accent. Compile with: lualatex card.tex
+% Minimal business card: night background, Inter type, one iridescent accent.
+% Compile with: lualatex card.tex
 % TikZ runs at x=1mm,y=1mm, so every bare coordinate is a millimetre.
 \documentclass[tikz,border=0mm]{standalone}
 \usepackage{graphicx}
@@ -12,8 +12,6 @@
 % Programming ligatures off so URLs print character for character.
 \setmonofont{JetBrains Mono}[RawFeature={-calt;-liga}]
 
-% Palette from GitToken's backend templates: the dark card background in
-% palette.jinja and the iridescent rim-colors gradient in profile.svg.jinja.
 \definecolor{night}{HTML}{0B0E1A}
 \definecolor{ink}{HTML}{FFFFFF}
 \colorlet{secondaryink}{ink!60!night}
