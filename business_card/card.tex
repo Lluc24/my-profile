@@ -1,9 +1,10 @@
-% Minimal business card in the GitToken style: night background, Inter type,
-% one iridescent accent. Compile with: lualatex card.tex
+% Minimal business card in GitToken's liquid-glass style: a night aurora
+% behind one frosted pane per side. Compile with: lualatex card.tex
 % TikZ runs at x=1mm,y=1mm, so every bare coordinate is a millimetre.
 \documentclass[tikz,border=0mm]{standalone}
 \usepackage{graphicx}
 \usepackage{fontspec}
+\usetikzlibrary{calc,fadings}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 
@@ -12,76 +13,86 @@
 % Programming ligatures off so URLs print character for character.
 \setmonofont{JetBrains Mono}[RawFeature={-calt;-liga}]
 
-% Palette from GitToken's backend templates/palette.jinja: the dark card
-% background and the iridescent rim of legendary profile cards.
-\definecolor{night}{HTML}{0B0E1A}
+% Palette from GitToken's frontend: --color-night in src/index.css and the
+% dark-theme aurora blobs in src/App.tsx.
+\definecolor{night}{HTML}{05060F}
 \definecolor{ink}{HTML}{FFFFFF}
 \colorlet{secondaryink}{ink!60!night}
-\definecolor{lightcyan}{HTML}{67E8F9}
-\definecolor{lightfuchsia}{HTML}{E879F9}
-\definecolor{lightamber}{HTML}{FCD34D}
-\definecolor{lightgreen}{HTML}{86EFAC}
+\definecolor{auroracyan}{HTML}{06B6D4}
+\definecolor{auroraviolet}{HTML}{7C3AED}
+\definecolor{aurorafuchsia}{HTML}{D946EF}
 
-% PGF maps a shaded path onto the middle 50bp of a 100bp shading.
-\pgfdeclarehorizontalshading{iridescent}{100bp}{%
-  color(0bp)=(lightcyan); color(25bp)=(lightcyan); color(42bp)=(lightfuchsia);
-  color(58bp)=(lightamber); color(75bp)=(lightgreen); color(100bp)=(lightgreen)}
+\tikzfading[name=aurorablob, inner color=transparent!0, outer color=transparent!100]
+\tikzfading[name=glassfill, left color=transparent!85, right color=transparent!95]
 
 \def\cardwidth{85}
 \def\cardheight{55}
 \def\bleed{3}
+\def\glassradius{4}
+\def\textleft{10}
 \pgfmathsetmacro{\fullwidth}{\cardwidth+2*\bleed}
 \pgfmathsetmacro{\fullheight}{\cardheight+2*\bleed}
 
 % The PDF page is the bleed box; the trim box tells the print shop where to cut.
 \pdfvariable pageattr{/TrimBox [8.504 8.504 249.447 164.409] /BleedBox [0 0 257.953 172.913]}
 
-\def\leftmargin{8}
+% #1, #2, #3: centres of the cyan, violet and fuchsia blobs.
+\newcommand{\aurora}[3]{%
+  \fill[night] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);
+  \fill[auroracyan, opacity=0.55, path fading=aurorablob] #1 circle (40);
+  \fill[auroraviolet, opacity=0.55, path fading=aurorablob] #2 circle (38);
+  \fill[aurorafuchsia, opacity=0.55, path fading=aurorablob] #3 circle (32);}
 
-\newcommand{\nightbackground}{%
-  \fill[night] (-\bleed,-\bleed) rectangle (\cardwidth+\bleed,\cardheight+\bleed);}
+% After src/glass.ts: white fill fading from 15% to 5% at 135deg, a 20% white
+% border, and a 45% white inset highlight along the top edge and corners.
+% #1, #2: lower-left and upper-right corners of the pane.
+\newcommand{\glasspane}[2]{%
+  \fill[white, path fading=glassfill, fading angle=-45, rounded corners=\glassradius mm] #1 rectangle #2;
+  \draw[white, opacity=0.2, line width=0.15mm, rounded corners=\glassradius mm] #1 rectangle #2;
+  \begin{scope}
+    \path #1 coordinate (paneBottomLeft) #2 coordinate (paneTopRight);
+    \clip ($(paneBottomLeft |- paneTopRight)+(0,-\glassradius)$) rectangle (paneTopRight);
+    \draw[white, opacity=0.45, line width=0.15mm, rounded corners=\glassradius mm - 0.15mm]
+      ($(paneBottomLeft)+(0.15,0.15)$) rectangle ($(paneTopRight)-(0.15,0.15)$);
+  \end{scope}}
 
 \newcommand{\linktext}[2]{\href{#1}{\ttfamily\fontsize{6.5}{7}\selectfont\color{ink}#2}}
 
-% #1: left end of the line, in mm.
-\newcommand{\accentline}[1]{\shade[shading=iridescent] #1 rectangle ++(12,0.5);}
-
 % #1: baseline y in mm; #2: link target; #3: printed text.
 \newcommand{\contactline}[3]{%
-  \node[anchor=base west, inner sep=0] at (\leftmargin,#1) {\linktext{#2}{#3}};}
+  \node[anchor=base west, inner sep=0] at (\textleft,#1) {\linktext{#2}{#3}};}
 
 \begin{document}
 
 \begin{tikzpicture}[x=1mm,y=1mm]
   \useasboundingbox (0,0) rectangle (\fullwidth,\fullheight);
   \begin{scope}[shift={(\bleed,\bleed)}]
-    \nightbackground
+    \aurora{(0,58)}{(88,26)}{(34,-10)}
+    \glasspane{(5,5)}{(80,50)}
 
-    \node[anchor=base west, inner sep=0] at (\leftmargin,41)
+    \node[anchor=base west, inner sep=0] at (\textleft,40)
       {\fontsize{13}{14}\selectfont\bfseries\addfontfeature{LetterSpace=-2}\color{ink}Lluc Santamaria Riba};
-    \node[anchor=base west, inner sep=0] at (\leftmargin,35.5)
+    \node[anchor=base west, inner sep=0] at (\textleft,34.5)
       {\semiboldfont\fontsize{6}{7}\selectfont\addfontfeature{LetterSpace=30}\color{secondaryink}\MakeUppercase{Voice AI Engineer · Prosper AI}};
-    \accentline{(\leftmargin,30.5)}
 
-    \contactline{19}{https://lluc.sh}{lluc.sh}
-    \contactline{15}{mailto:lluc@lluc.sh}{lluc@lluc.sh}
-    \contactline{11}{https://github.com/Lluc24}{github.com/Lluc24}
-    \contactline{7}{https://linkedin.com/in/lluc-santamaria}{linkedin.com/in/lluc-santamaria}
+    \contactline{20}{https://lluc.sh}{lluc.sh}
+    \contactline{16.5}{mailto:lluc@lluc.sh}{lluc@lluc.sh}
+    \contactline{13}{https://github.com/Lluc24}{github.com/Lluc24}
+    \contactline{9.5}{https://linkedin.com/in/lluc-santamaria}{linkedin.com/in/lluc-santamaria}
   \end{scope}
 \end{tikzpicture}
 
 \begin{tikzpicture}[x=1mm,y=1mm]
   \useasboundingbox (0,0) rectangle (\fullwidth,\fullheight);
   \begin{scope}[shift={(\bleed,\bleed)}]
-    \nightbackground
+    \aurora{(85,-3)}{(-3,30)}{(55,60)}
+    \glasspane{(27,8)}{(58,47)}
 
-    % The QR quiet zone must stay white whatever ink becomes.
-    \fill[white, rounded corners=1.5mm] (30,18) rectangle (55,43);
-    \node[anchor=center, inner sep=0] at (42.5,30.5)
-      {\href{https://lluc.sh}{\includegraphics[width=21mm]{qr.png}}};
-    \accentline{(36.5,12.5)}
-    \node[anchor=base, inner sep=0] at (42.5,7)
-      {\linktext{https://lluc.sh}{lluc.sh}};
+    % The QR quiet zone must stay white whatever the background becomes.
+    \fill[white, rounded corners=1.5mm] (31.5,21) rectangle (53.5,43);
+    \node[anchor=center, inner sep=0] at (42.5,32)
+      {\href{https://lluc.sh}{\includegraphics[width=18.5mm]{qr.png}}};
+    \node[anchor=base, inner sep=0] at (42.5,13) {\linktext{https://lluc.sh}{lluc.sh}};
   \end{scope}
 \end{tikzpicture}
 
