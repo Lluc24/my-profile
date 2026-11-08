@@ -12,11 +12,12 @@ This repository serves as a central archive for my professional documentation. I
 | --- | --- |
 | [`BACKGROUND.yaml`](BACKGROUND.yaml) | Full professional background (single source of truth). |
 | [`cv/`](cv) | Curriculum Vitae LaTeX source (`Lluc_Santamaria_CV.tex`) and compiled PDF. |
-| [`business_card/`](business_card) | Business card LaTeX source (`card.tex`), compiled PDF, and QR code asset. |
+| [`business_card/`](business_card) | Business card LaTeX source (`card.tex` at 85 × 55 mm, `card_us.tex` at 3.5 × 2 in), compiled PDFs, and QR code asset. |
 
 You can view the latest compiled versions directly here:
 - [View Curriculum Vitae (PDF)](cv/Lluc_Santamaria_CV.pdf)
 - [View Business Card (PDF)](business_card/card.pdf)
+- [View Business Card, US size (PDF)](business_card/card_us.pdf)
 
 ## Build Instructions
 
@@ -35,6 +36,7 @@ pdflatex Lluc_Santamaria_CV.tex
 ```bash
 cd business_card
 lualatex card.tex
+lualatex card_us.tex
 ```
 
 ## Usage and License

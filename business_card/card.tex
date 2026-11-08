@@ -1,9 +1,12 @@
 % Minimal business card: night background, Inter type, one iridescent accent.
-% Compile with: lualatex card.tex
-% TikZ runs at x=1mm,y=1mm, so every bare coordinate is a millimetre.
+% Compile with: lualatex card.tex (85 x 55 mm). card_us.tex sets the US size
+% before loading this file; vertical positions scale with \cardheight.
+% TikZ runs at x=1mm,y=1mm. Heights passed through \verticalscale are layout
+% mm, measured on the \layoutheight mm design; all other numbers are real mm.
 \documentclass[tikz,border=0mm]{standalone}
 \usepackage{graphicx}
 \usepackage{fontspec}
+\usetikzlibrary{calc}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 
@@ -24,14 +27,24 @@
   color(0bp)=(lightcyan); color(25bp)=(lightcyan); color(42bp)=(lightfuchsia);
   color(58bp)=(lightamber); color(75bp)=(lightgreen); color(100bp)=(lightgreen)}
 
-\def\cardwidth{85}
-\def\cardheight{55}
-\def\bleed{3}
+\def\layoutheight{55}
+\providecommand{\cardwidth}{85}
+\providecommand{\cardheight}{\layoutheight}
+\providecommand{\bleed}{3}
 \pgfmathsetmacro{\fullwidth}{\cardwidth+2*\bleed}
 \pgfmathsetmacro{\fullheight}{\cardheight+2*\bleed}
+\pgfmathsetmacro{\verticalscale}{\cardheight/\layoutheight}
 
 % The PDF page is the bleed box; the trim box tells the print shop where to cut.
-\pdfvariable pageattr{/TrimBox [8.504 8.504 249.447 164.409] /BleedBox [0 0 257.953 172.913]}
+\pgfmathsetmacro{\bigpointspermm}{72/25.4}
+\pgfmathsetmacro{\bleedbp}{\bleed*\bigpointspermm}
+\pgfmathsetmacro{\trimrightbp}{(\cardwidth+\bleed)*\bigpointspermm}
+\pgfmathsetmacro{\trimtopbp}{(\cardheight+\bleed)*\bigpointspermm}
+\pgfmathsetmacro{\fullwidthbp}{\fullwidth*\bigpointspermm}
+\pgfmathsetmacro{\fullheightbp}{\fullheight*\bigpointspermm}
+\edef\pageboxes{/TrimBox [\bleedbp\space\bleedbp\space\trimrightbp\space\trimtopbp]
+  /BleedBox [0 0 \fullwidthbp\space\fullheightbp]}
+\pdfvariable pageattr\expandafter{\pageboxes}
 
 \def\textleft{8}
 \def\linkedinurl{https://linkedin.com/in/lluc-santamaria}
@@ -42,12 +55,13 @@
 \newcommand{\monotext}{\ttfamily\fontsize{6.5}{7}\selectfont}
 \newcommand{\linktext}[2]{\href{#1}{\monotext\color{ink}#2}}
 
-% #1: left end of the line, in mm.
-\newcommand{\accentline}[1]{\shade[shading=iridescent] #1 rectangle ++(12,0.5);}
+\def\accentlength{12}
+% #1: left end x in mm; #2: bottom y in layout mm.
+\newcommand{\accentline}[2]{\shade[shading=iridescent] (#1,#2*\verticalscale) rectangle ++(\accentlength,0.5);}
 
-% #1: baseline y in mm; #2: link target; #3: printed text.
+% #1: baseline y in layout mm; #2: link target; #3: printed text.
 \newcommand{\contactline}[3]{%
-  \node[anchor=base west, inner sep=0] at (\textleft,#1) {\linktext{#2}{#3}};}
+  \node[anchor=base west, inner sep=0] at (\textleft,#1*\verticalscale) {\linktext{#2}{#3}};}
 
 \begin{document}
 
@@ -56,13 +70,13 @@
   \begin{scope}[shift={(\bleed,\bleed)}]
     \nightbackground
 
-    \node[anchor=base west, inner sep=0] at (\textleft,41)
+    \node[anchor=base west, inner sep=0] at (\textleft,41*\verticalscale)
       {\fontsize{13}{14}\selectfont\bfseries\addfontfeature{LetterSpace=-2}\color{ink}Lluc Santamaria Riba};
-    \node[anchor=base west, inner sep=0] at (\textleft,35.5)
+    \node[anchor=base west, inner sep=0] at (\textleft,35.5*\verticalscale)
       {\monotext\color{secondaryink}Voice AI Engineer%
         \hspace{2.2mm}\rule[-0.6mm]{0.15mm}{2.8mm}\hspace{2.2mm}%
         {\color{ink}Prosper AI}};
-    \accentline{(\textleft,30.5)}
+    \accentline{\textleft}{30.5}
 
     \contactline{19}{https://lluc.sh}{lluc.sh}
     \contactline{15}{mailto:lluc@lluc.sh}{lluc@lluc.sh}
@@ -77,11 +91,12 @@
     \nightbackground
 
     % The QR quiet zone must stay white whatever the background becomes.
-    \fill[white, rounded corners=1.5mm] (30,18) rectangle (55,43);
-    \node[anchor=center, inner sep=0] at (42.5,30.5)
+    \coordinate (qrcentre) at (\cardwidth/2,30.5*\verticalscale);
+    \fill[white, rounded corners=1.5mm] ($(qrcentre)-(12.5,12.5)$) rectangle ($(qrcentre)+(12.5,12.5)$);
+    \node[anchor=center, inner sep=0] at (qrcentre)
       {\href{\linkedinurl}{\includegraphics[width=21mm]{qr.png}}};
-    \accentline{(36.5,12.5)}
-    \node[anchor=base, inner sep=0] at (42.5,7)
+    \accentline{\cardwidth/2-\accentlength/2}{12.5}
+    \node[anchor=base, inner sep=0] at (\cardwidth/2,7*\verticalscale)
       {\linktext{\linkedinurl}{linkedin.com/in/lluc-santamaria}};
   \end{scope}
 \end{tikzpicture}
